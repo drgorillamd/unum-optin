@@ -1,3 +1,4 @@
+//SPDX-License-Identifier:  MIT
 pragma solidity ^0.8.17;
 
 import { IERC721 } from "@openzeppelin/contracts/interfaces/IERC721.sol";
@@ -10,7 +11,7 @@ import { IJBFundingCycleStore } from "@jbx-protocol/juice-contracts-v3/contracts
 import { JBTokens } from "@jbx-protocol/juice-contracts-v3/contracts/libraries/JBTokens.sol";
 import { JBFundingCycleMetadata } from "@jbx-protocol/juice-contracts-v3/contracts/structs/JBFundingCycleMetadata.sol";
 
-import { IJB721Delegate } from 
+import { IJB721Delegate } from "@jbx-protocol/juice-721-delegate/contracts/interfaces/IJB721Delegate.sol";
 
 
 contract UnumOptIn {
@@ -69,8 +70,19 @@ contract UnumOptIn {
             bytes('')
         );
        
-        // metadata: (NA, NA, fn selector, _dontMint, _expectMintFromExtraFunds, _dontOverspend, _tierIdsToMint)
-        bytes memory _mintingMetadata = abi.encode(bytes32(0), bytes32(0), type(IJB721Delegate).interfaceId, false, true, false, new uint8[](0));
+        bool _dontMint = false;
+        bool _expectMintFromExtraFunds = true;
+        bool _dontOverspend = true; 
+
+        bytes memory _mintingMetadata = abi.encode(
+            bytes32(0),
+            bytes32(0),
+            type(IJB721Delegate).interfaceId,
+            _dontMint,
+            _expectMintFromExtraFunds,
+            _dontOverspend,
+            new uint8[](0)
+        );
 
         // Mint unumDao NFT with the ETH received
         UNUMPaymentTerminal.pay(
@@ -81,7 +93,7 @@ contract UnumOptIn {
             0,
             false,
             "opt-in from CDAO2",
-            bytes('') // TODO: add metadata
+            _mintingMetadata
         );
     }
 }
