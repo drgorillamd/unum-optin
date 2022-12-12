@@ -14,20 +14,58 @@ import { JBFundingCycleMetadata } from "@jbx-protocol/juice-contracts-v3/contrac
 import { IJB721Delegate } from "@jbx-protocol/juice-721-delegate/contracts/interfaces/IJB721Delegate.sol";
 
 
+/**
+ * @title UnumOptIn
+ *
+ * @dev This contract allows to opt-in from Constitution DAO 2 (CDAO2) to UnumDao using the NFT
+ *
+ */
+
 contract UnumOptIn {
 
+    /**
+     * @notice The project id of the CDAO2 project
+     */
     uint256 public immutable cdaoProjectId;
-
+    
+    /**
+     * @notice The project ids of the UnumDao project
+     */
     uint256 public immutable unumProjectId;
 
+    /**
+     * @notice The CDAO2 NFT contract
+     */
     IERC721 public immutable CDAO2NFT;
 
+    /**
+     * @notice The UnumDao NFT contract
+     */
     IERC721 public immutable UNUMNFT;
 
+    /**
+     * @notice The CDAO2 ETH terminal
+     *
+     * @dev Most likely the same as the UnumDAO terminal
+     */
     IJBRedemptionTerminal public immutable CDAO2RedemptionTerminal;
 
+    /**
+     * @notice The UnumDao ETH terminal
+     *
+     * @dev Most likely the same as the CDAO2 terminal
+     */
     IJBPaymentTerminal public immutable UNUMPaymentTerminal;
 
+    /**
+     * @notice This opt-in contract is based on the datasources/NFT contract used
+     *         at deployment time. If the datasources/NFT contract changes, this
+     *         contract needs to be redeployed.
+     *
+     * @param _unumProjectId The project id of the UnumDao project
+     * @param _cdaoProjectId The project id of the CDAO2 project
+     * @param _controller The controller of the UnumDao project
+     */
     constructor(uint256 _unumProjectId, uint256 _cdaoProjectId , IJBController _controller) {
         unumProjectId = _unumProjectId;
         cdaoProjectId = _cdaoProjectId;
@@ -46,11 +84,20 @@ contract UnumOptIn {
         CDAO2RedemptionTerminal = IJBRedemptionTerminal(address(_directory.primaryTerminalOf(_cdaoProjectId, JBTokens.ETH)));
     }
 
-
+    /**
+     * @notice Opt-in from CDAO2 to UnumDao, using multiple CDAO2 NFTs
+     *
+     * @param _tokenIds The NFT ids to redeem while opt-ing
+     */
     function optIn(uint256[] calldata _tokenIds) external {
         // Loop and redeem every NFT - todo
     }
 
+    /**
+     * @notice Opt-in from CDAO2 to UnumDao, using a single CDAO2 NFT
+     *
+     * @param _tokenId The NFT id to redeem while opt-ing
+     */
     function optIn(uint256 _tokenId) public {
         // Pull cdao2 NFT to this address
         CDAO2NFT.transferFrom(msg.sender, address(this), _tokenId);
