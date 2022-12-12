@@ -32,14 +32,14 @@ contract UnumOptIn {
         unumProjectId = _unumProjectId;
         cdaoProjectId = _cdaoProjectId;
 
-        // Get the current FC datasource address and primary terminals
+        // Get the current FC datasource addressess  
         (, JBFundingCycleMetadata memory _metadataUnum) = _controller.currentFundingCycleOf(_unumProjectId);
         (, JBFundingCycleMetadata memory _metadataCdao) = _controller.currentFundingCycleOf(_cdaoProjectId);
 
         CDAO2NFT = IERC721(_metadataCdao.dataSource);
         UNUMNFT = IERC721(_metadataUnum.dataSource);
 
-
+        // Get the correct terminals
         IJBDirectory _directory = IJBDirectory(_controller.directory());
 
         UNUMPaymentTerminal = _directory.primaryTerminalOf(_unumProjectId, JBTokens.ETH);
@@ -48,17 +48,17 @@ contract UnumOptIn {
 
 
     function optIn(uint256[] calldata _tokenIds) external {
-        // Loop and redeem every NFT
+        // Loop and redeem every NFT - todo
     }
 
     function optIn(uint256 _tokenId) public {
-        // Pull cdao2 NFT
+        // Pull cdao2 NFT to this address
         CDAO2NFT.transferFrom(msg.sender, address(this), _tokenId);
         
         // Approve the redemption delegate
         CDAO2NFT.approve(address(CDAO2RedemptionTerminal), _tokenId);
 
-        // Redeem
+        // Redeem from the NFT only
         uint256 _reclaimedAmount = CDAO2RedemptionTerminal.redeemTokensOf(
             address(this),
             cdaoProjectId,
@@ -70,6 +70,7 @@ contract UnumOptIn {
             bytes('')
         );
        
+        // Prepare the NFT Reward metadatas
         bool _dontMint = false;
         bool _expectMintFromExtraFunds = true;
         bool _dontOverspend = true; 
