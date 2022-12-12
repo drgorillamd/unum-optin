@@ -1,0 +1,50 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "contracts/UnumOptIn.sol",
+    "id": 3,
+    "exportedSymbols": {
+      "IJBRedemptionTerminal": [
+        26
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "0:117:0",
+    "nodes": [
+      {
+        "id": 1,
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".17"
+        ]
+      },
+      {
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "src": "26:89:0",
+        "nodes": [],
+        "absolutePath": "lib/juice-contracts-v3/contracts/interfaces/IJBRedemptionTerminal.sol",
+        "file": "@jbx-protocol/juice-contracts-v3/contracts/interfaces/IJBRedemptionTerminal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 3,
+        "sourceUnit": 27,
+        "symbolAliases": [],
+        "unitAlias": ""
+      }
+    ]
+  },
+  "id": 0
+}

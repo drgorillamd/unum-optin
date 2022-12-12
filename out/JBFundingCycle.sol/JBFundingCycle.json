@@ -1,0 +1,326 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "lib/juice-contracts-v3/contracts/structs/JBFundingCycle.sol",
+    "id": 1448,
+    "exportedSymbols": {
+      "IERC165": [
+        1709
+      ],
+      "IJBFundingCycleBallot": [
+        765
+      ],
+      "JBBallotState": [
+        201
+      ],
+      "JBFundingCycle": [
+        1447
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "32:2552:17",
+    "nodes": [
+      {
+        "id": 1426,
+        "nodeType": "PragmaDirective",
+        "src": "32:23:17",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 1427,
+        "nodeType": "ImportDirective",
+        "src": "57:51:17",
+        "nodes": [],
+        "absolutePath": "lib/juice-contracts-v3/contracts/interfaces/IJBFundingCycleBallot.sol",
+        "file": "./../interfaces/IJBFundingCycleBallot.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 1448,
+        "sourceUnit": 766,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 1447,
+        "nodeType": "StructDefinition",
+        "src": "2365:218:17",
+        "nodes": [],
+        "canonicalName": "JBFundingCycle",
+        "members": [
+          {
+            "constant": false,
+            "id": 1429,
+            "mutability": "mutable",
+            "name": "number",
+            "nameLocation": "2399:6:17",
+            "nodeType": "VariableDeclaration",
+            "scope": 1447,
+            "src": "2391:14:17",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1428,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "2391:7:17",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1431,
+            "mutability": "mutable",
+            "name": "configuration",
+            "nameLocation": "2417:13:17",
+            "nodeType": "VariableDeclaration",
+            "scope": 1447,
+            "src": "2409:21:17",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1430,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "2409:7:17",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1433,
+            "mutability": "mutable",
+            "name": "basedOn",
+            "nameLocation": "2442:7:17",
+            "nodeType": "VariableDeclaration",
+            "scope": 1447,
+            "src": "2434:15:17",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1432,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "2434:7:17",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1435,
+            "mutability": "mutable",
+            "name": "start",
+            "nameLocation": "2461:5:17",
+            "nodeType": "VariableDeclaration",
+            "scope": 1447,
+            "src": "2453:13:17",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1434,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "2453:7:17",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1437,
+            "mutability": "mutable",
+            "name": "duration",
+            "nameLocation": "2478:8:17",
+            "nodeType": "VariableDeclaration",
+            "scope": 1447,
+            "src": "2470:16:17",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1436,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "2470:7:17",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1439,
+            "mutability": "mutable",
+            "name": "weight",
+            "nameLocation": "2498:6:17",
+            "nodeType": "VariableDeclaration",
+            "scope": 1447,
+            "src": "2490:14:17",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1438,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "2490:7:17",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1441,
+            "mutability": "mutable",
+            "name": "discountRate",
+            "nameLocation": "2516:12:17",
+            "nodeType": "VariableDeclaration",
+            "scope": 1447,
+            "src": "2508:20:17",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1440,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "2508:7:17",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1444,
+            "mutability": "mutable",
+            "name": "ballot",
+            "nameLocation": "2554:6:17",
+            "nodeType": "VariableDeclaration",
+            "scope": 1447,
+            "src": "2532:28:17",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IJBFundingCycleBallot_$765",
+              "typeString": "contract IJBFundingCycleBallot"
+            },
+            "typeName": {
+              "id": 1443,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 1442,
+                "name": "IJBFundingCycleBallot",
+                "nameLocations": [
+                  "2532:21:17"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 765,
+                "src": "2532:21:17"
+              },
+              "referencedDeclaration": 765,
+              "src": "2532:21:17",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IJBFundingCycleBallot_$765",
+                "typeString": "contract IJBFundingCycleBallot"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1446,
+            "mutability": "mutable",
+            "name": "metadata",
+            "nameLocation": "2572:8:17",
+            "nodeType": "VariableDeclaration",
+            "scope": 1447,
+            "src": "2564:16:17",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1445,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "2564:7:17",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "name": "JBFundingCycle",
+        "nameLocation": "2372:14:17",
+        "scope": 1448,
+        "visibility": "public"
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 17
+}
