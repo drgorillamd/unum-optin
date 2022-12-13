@@ -9,9 +9,6 @@
 	path = lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
 	branch = v4.8.0
-[submodule "lib/juice-721-delegate"]
-	path = lib/juice-721-delegate
-	url = https://github.com/jbx-protocol/juice-721-delegate
 [submodule "lib/prb-math"]
 	path = lib/prb-math
 	url = https://github.com/hifi-finance/prb-math
