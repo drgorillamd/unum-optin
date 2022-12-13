@@ -105,7 +105,12 @@ contract UnumOptIn {
         // Approve the redemption delegate
         CDAO2NFT.approve(address(CDAO2RedemptionTerminal), _tokenId);
 
-        // Redeem from the NFT only
+        // Prepare the redemption metadata
+        uint256[] memory _tokenIds = new uint256[](1);
+        _tokenIds[0] = _tokenId;
+        bytes memory _redemptionMetadata = abi.encode(bytes32(0), type(IJB721Delegate).interfaceId, _tokenIds);
+
+        // Redeem (the NFT is transfered to this address to avoid a third transaction to give the redemption role)
         uint256 _reclaimedAmount = CDAO2RedemptionTerminal.redeemTokensOf(
             address(this),
             cdaoProjectId,
@@ -113,14 +118,17 @@ contract UnumOptIn {
             JBTokens.ETH,
             0,
             payable(address(this)),
-            "unumDao opt-in",
-            bytes('')
+            "UnumDao opt-in",
+            _redemptionMetadata
         );
        
         // Prepare the NFT Reward metadatas
         bool _dontMint = false;
         bool _expectMintFromExtraFunds = true;
         bool _dontOverspend = true; 
+
+        uint8[] memory _tiersToMint = new uint8[](1);
+        _tiersToMint[0] = uint8(_tokenId / 1_000_000_000);
 
         bytes memory _mintingMetadata = abi.encode(
             bytes32(0),
@@ -129,11 +137,11 @@ contract UnumOptIn {
             _dontMint,
             _expectMintFromExtraFunds,
             _dontOverspend,
-            new uint8[](0)
+            _tiersToMint
         );
 
         // Mint unumDao NFT with the ETH received
-        UNUMPaymentTerminal.pay(
+        UNUMPaymentTerminal.pay{value: _reclaimedAmount}(
             unumProjectId,
             _reclaimedAmount,
             JBTokens.ETH,
@@ -144,4 +152,11 @@ contract UnumOptIn {
             _mintingMetadata
         );
     }
+
+    /**
+     * @notice Receive ETH when redeeming
+     */
+    receive() external payable {}
+
+
 }

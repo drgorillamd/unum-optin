@@ -40,7 +40,7 @@ import 'forge-std/Test.sol';
 
 import './AccessJBLib.sol';
 
-import './../../structs/JBPayDataSourceFundingCycleMetadata.sol';
+import '@jbx-protocol/juice-721-delegate/contracts/structs/JBPayDataSourceFundingCycleMetadata.sol';
 
 // Base contract for Juicebox system tests.
 //
@@ -154,8 +154,8 @@ contract TestBaseWorkflow is Test {
 
     _data = JBFundingCycleData({
       duration: 14,
-      weight: 1000 * 10**18,
-      discountRate: 450000000,
+      weight: 0,
+      discountRate: 0,
       ballot: IJBFundingCycleBallot(address(0))
     });
 
@@ -165,9 +165,9 @@ contract TestBaseWorkflow is Test {
         allowSetController: false,
         pauseTransfers: false
       }),
-      reservedRate: 5000, //50%
-      redemptionRate: 5000, //50%
-      ballotRedemptionRate: 5000,
+      reservedRate: 0, //0%
+      redemptionRate: 10000, //100%
+      ballotRedemptionRate: 10000,
       pausePay: false,
       pauseDistributions: false,
       pauseRedeem: false,

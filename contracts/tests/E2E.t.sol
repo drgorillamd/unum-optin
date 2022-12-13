@@ -6,15 +6,26 @@ import '@jbx-protocol/juice-721-delegate/contracts/JBTiered721Delegate.sol';
 import '@jbx-protocol/juice-721-delegate/contracts/JBTiered721DelegateProjectDeployer.sol';
 import '@jbx-protocol/juice-721-delegate/contracts/JBTiered721DelegateDeployer.sol';
 import '@jbx-protocol/juice-721-delegate/contracts/JBTiered721DelegateStore.sol';
+import '@jbx-protocol/juice-721-delegate/contracts/interfaces/IJBTiered721Delegate.sol';
 
 import './utils/TestBaseWorkflow.sol';
-import '@jbx-protocol/juice-721-delegate/contracts/interfaces/IJBTiered721Delegate.sol';
+
+import '../UnumOptIn.sol';
 
 contract TestUnumOptinE2E is TestBaseWorkflow {
   using JBFundingCycleMetadataResolver for JBFundingCycle;
 
   uint256 projectIdCDAO2;
   uint256 projectIdUnum;
+
+  IERC721 CDAO2NFT;
+  IERC721 UNUMNFT;
+
+  address reserveBeneficiary = makeAddr('reserveBeneficiary');
+  string name = 'NFT';
+  string symbol = 'SYM';
+  string baseUri = 'https://ipfs.io/ipfs/';
+  string contractUri = 'https://ipfs.io/ipfs/123';
 
   //QmWmyoMoctfbAaiEs2G46gpeUmhqFRDW6KWo64y5r581Vz
   bytes32 tokenUri = bytes32(0x7D5A99F603F231D53A4F39D1521F98D2E8BB279CF29BEBFD0687DC98458E7F89);
@@ -63,15 +74,6 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
     // Mint one per tier for the first 5 tiers
     for (uint256 i = 0; i < 5; i++) {
       rawMetadata[i] = uint16(i + 1); // Not the tier 0
-      // Check: correct tiers and ids?
-      vm.expectEmit(true, true, true, true);
-      emit Mint(
-        _generateTokenId(i + 1, 1),
-        i + 1,
-        _beneficiary,
-        _amountNeeded,
-        address(_jbETHPaymentTerminal) // msg.sender
-      );
     }
 
     // Encode it to metadata
@@ -87,7 +89,7 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
 
     vm.prank(_caller);
     _jbETHPaymentTerminal.pay{value: _amountNeeded}(
-      projectId,
+      projectIdCDAO2,
       _amountNeeded,
       address(0),
       _beneficiary,
@@ -100,10 +102,28 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
       /* _delegateMetadata */
       metadata
     );
+
+    CDAO2NFT = IERC721(_jbFundingCycleStore.currentOf(projectIdCDAO2).dataSource());
+    UNUMNFT = IERC721(_jbFundingCycleStore.currentOf(projectIdUnum).dataSource());
   }
 
-  function testOptin() external {
-    
+  function testOptinOneNFT() external {
+    UnumOptIn _optIn = new UnumOptIn(projectIdUnum, projectIdCDAO2, _jbController);
+
+    uint256 _tokenId = _generateTokenId(1, 1);
+
+    vm.prank(_beneficiary);
+    CDAO2NFT.approve(address(_optIn), _tokenId);
+
+    vm.prank(_beneficiary);
+    _optIn.optIn(_tokenId);
+
+    // Check: first token of cdao2 is burned
+    vm.expectRevert(abi.encodeWithSelector(ERC721.INVALID_TOKEN_ID.selector));
+    CDAO2NFT.ownerOf(_tokenId);
+
+    // Check: _beneficiary own the first token of unum corresponding tier
+    assertEq(UNUMNFT.ownerOf(_tokenId), _beneficiary);
   }
 
 
@@ -124,7 +144,7 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
         lockedUntil: uint48(0),
         initialQuantity: uint40(10),
         votingUnits: uint16((i + 1) * 10),
-        reservedRate: 10,
+        reservedRate: 0,
         reservedTokenBeneficiary: reserveBeneficiary,
         encodedIPFSUri: tokenUri,
         allowManualMint: false,
