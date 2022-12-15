@@ -90,24 +90,15 @@ contract UnumOptIn {
      * @param _tokenIds The NFT ids to redeem while opt-ing
      */
     function optIn(uint256[] calldata _tokenIds) external {
-        // Loop and redeem every NFT - todo
-    }
-
-    /**
-     * @notice Opt-in from CDAO2 to UnumDao, using a single CDAO2 NFT
-     *
-     * @param _tokenId The NFT id to redeem while opt-ing
-     */
-    function optIn(uint256 _tokenId) public {
-        // Pull cdao2 NFT to this address
-        CDAO2NFT.transferFrom(msg.sender, address(this), _tokenId);
+        // Pull and approve all the tokens
+        for (uint256 i = 0; i < _tokenIds.length; i++) {
+            // Pull cdao2 NFT to this address
+            CDAO2NFT.transferFrom(msg.sender, address(this), _tokenIds[i]);
+            
+            // Approve the redemption delegate
+            CDAO2NFT.approve(address(CDAO2RedemptionTerminal), _tokenIds[i]);
+        }
         
-        // Approve the redemption delegate
-        CDAO2NFT.approve(address(CDAO2RedemptionTerminal), _tokenId);
-
-        // Prepare the redemption metadata
-        uint256[] memory _tokenIds = new uint256[](1);
-        _tokenIds[0] = _tokenId;
         bytes memory _redemptionMetadata = abi.encode(bytes32(0), type(IJB721Delegate).interfaceId, _tokenIds);
 
         // Redeem (the NFT is transfered to this address to avoid a third transaction to give the redemption role)
@@ -121,14 +112,19 @@ contract UnumOptIn {
             "UnumDao opt-in",
             _redemptionMetadata
         );
-       
+
         // Prepare the NFT Reward metadatas
         bool _dontMint = false;
-        bool _expectMintFromExtraFunds = true;
-        bool _dontOverspend = true; 
 
-        uint8[] memory _tiersToMint = new uint8[](1);
-        _tiersToMint[0] = uint8(_tokenId / 1_000_000_000);
+        // If extra fund, accept them but don't mint with them -> if too low to get a tier, would then revert,
+        // adding them without minting on the other hand increases every NFT's nominal.
+        bool _expectMintFromExtraFunds = false;
+        bool _dontOverspend = false; 
+
+        uint8[] memory _tiersToMint = new uint8[](_tokenIds.length);
+        for(uint256 i = 0; i < _tokenIds.length; i++) {
+            _tiersToMint[i] = uint8(_tokenIds[i] / 1_000_000_000);
+        }
 
         bytes memory _mintingMetadata = abi.encode(
             bytes32(0),
@@ -151,6 +147,8 @@ contract UnumOptIn {
             "opt-in from CDAO2",
             _mintingMetadata
         );
+
+
     }
 
     /**
