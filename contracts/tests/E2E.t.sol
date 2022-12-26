@@ -70,12 +70,12 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
       launchProjectData
     );
 
-    // 5 first tier floors
-    uint256 _amountNeeded = 50 + 40 + 30 + 20 + 10;
-    uint16[] memory rawMetadata = new uint16[](5);
+    // 4 first tier floors
+    uint256 _amountNeeded = 111.1 ether;
+    uint16[] memory rawMetadata = new uint16[](4);
 
     // Mint one per tier for the first 5 tiers
-    for (uint256 i = 0; i < 5; i++) {
+    for (uint256 i = 0; i < 4; i++) {
       rawMetadata[i] = uint16(i + 1); // Not the tier 0
     }
 
@@ -90,6 +90,7 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
       rawMetadata
     );
 
+    vm.deal(_caller, 111.1 ether);
     vm.prank(_caller);
     _jbETHPaymentTerminal.pay{value: _amountNeeded}({
       _projectId: projectIdCDAO2,
@@ -150,7 +151,7 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
   *         This should redeem and get eth from CDAO2 which are then used to mint one or many unum NFT
   */       
   function test_Optin_OptWithMultipleNFT(uint8 _nbOfNft) external {
-    vm.assume(_nbOfNft > 0 && _nbOfNft <= 5); // 5 NFT minted in the fixture
+    vm.assume(_nbOfNft > 0 && _nbOfNft <= 4);
 
     uint256 _treasuryCdao2Before = _jbPaymentTerminalStore.balanceOf(_jbETHPaymentTerminal, projectIdCDAO2);
     uint256 _treasuryUnumBefore = _jbPaymentTerminalStore.balanceOf(_jbETHPaymentTerminal, projectIdUnum);
@@ -195,14 +196,14 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
   *         This should redeem and get the whole treasury
   */       
   function test_Optin_OptWhenCdao2HasExtraFunds(uint32 _amountAddedWithoutMint) external {
-    uint256 _nbOfNft = 5; // redeem all the NFT, to transfer the whole treasury
+    uint256 _nbOfNft = 4; // redeem all the NFT, to transfer the whole treasury
     vm.assume(_amountAddedWithoutMint > 10);
 
     // Add fund to cdao2 using addtoBalance
     vm.prank(_beneficiary);
     _jbETHPaymentTerminal.addToBalanceOf{value: _amountAddedWithoutMint}({
       _projectId: projectIdCDAO2,
-      _amount: 100,
+      _amount: _amountAddedWithoutMint,
       _token: JBTokens.ETH,
       _memo: "take my $",
       _metadata: new bytes(0)
@@ -222,8 +223,8 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
       vm.prank(_beneficiary);
       CDAO2NFT.approve(address(_optIn), _tokenIds[i]);
 
-      // Add the amount used to mint to the total treasury
-      _totalTreasuryBalance += (i+1) * 10;
+      // Add the amount used to mint to the total treasury (ie 0.1 - 1 - 10 - 100 eth)
+      _totalTreasuryBalance += 0.1 ether * 10**i;
     }
 
     // Test: trigger the optin
@@ -249,6 +250,7 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
   * @notice Try opt-in'ing to unumDao, using an cdao2 NFT, when there are mints to unumDao in parallel
   */   
   function test_Optin_OptWithMultipleNFTWhileMinting() external {
+    vm.deal(_caller, 1.1 ether);
     uint256 _treasuryCdao2Before = _jbPaymentTerminalStore.balanceOf(_jbETHPaymentTerminal, projectIdCDAO2);
     uint256 _treasuryUnumBefore = _jbPaymentTerminalStore.balanceOf(_jbETHPaymentTerminal, projectIdUnum);
 
@@ -270,9 +272,9 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
     );
 
     vm.prank(_caller);
-    _jbETHPaymentTerminal.pay{value: 10}({
+    _jbETHPaymentTerminal.pay{value: 0.1 ether}({
       _projectId: projectIdUnum,
-      _amount: 10,
+      _amount: 0.1 ether,
       _token: address(0),
       _beneficiary: _beneficiary,
       _minReturnedTokens: 0,
@@ -321,9 +323,9 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
     );
 
     vm.prank(_caller);
-    _jbETHPaymentTerminal.pay{value: 20}({
+    _jbETHPaymentTerminal.pay{value: 1 ether}({
       _projectId: projectIdUnum,
-      _amount: 20,
+      _amount: 1 ether,
       _token: address(0),
       _beneficiary: _beneficiary,
       _minReturnedTokens: 0,
@@ -332,17 +334,15 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
       _metadata: metadata
     });
 
-    // Redeem the 3 tiers left
-    uint256[] memory _secondTokenIds = new uint256[](3);
+    // Redeem the 2 tiers left
+    uint256[] memory _secondTokenIds = new uint256[](2);
     _secondTokenIds[0] = _generateTokenId(2, 1); // already a token in second tier
     _secondTokenIds[1] = _generateTokenId(4, 1);
-    _secondTokenIds[2] = _generateTokenId(5, 1);
 
     // Approve the optIn contract for each token to optin
     vm.startPrank(_beneficiary);
     CDAO2NFT.approve(address(_optIn), _secondTokenIds[0]);
     CDAO2NFT.approve(address(_optIn), _secondTokenIds[1]);
-    CDAO2NFT.approve(address(_optIn), _secondTokenIds[2]);
     vm.stopPrank();
 
     // Test: trigger the optin
@@ -350,7 +350,7 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
     _optIn.optIn(_secondTokenIds);
 
     // Check: all the CDAO2 token are burned
-    for(uint i; i < 3; i++) {
+    for(uint i; i < 2; i++) {
       vm.expectRevert(abi.encodeWithSelector(ERC721.INVALID_TOKEN_ID.selector));
       CDAO2NFT.ownerOf(_secondTokenIds[i]);
     }
@@ -358,14 +358,13 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
     // Check: _beneficiary own the first token of unum corresponding tier
     assertEq(UNUMNFT.ownerOf(_generateTokenId(2, 2)), _beneficiary); // already a token in second tier
     assertEq(UNUMNFT.ownerOf(_generateTokenId(4, 1)), _beneficiary); // already a token in second tier
-    assertEq(UNUMNFT.ownerOf(_generateTokenId(5, 1)), _beneficiary); // already a token in second tier
 
     // Check: the redeemed part of the treasury is transfered from one project to the other + the amount coming from the extra mints
     uint256 _treasuryCdao2After = _jbPaymentTerminalStore.balanceOf(_jbETHPaymentTerminal, projectIdCDAO2);
     uint256 _treasuryUnumAfter = _jbPaymentTerminalStore.balanceOf(_jbETHPaymentTerminal, projectIdUnum);
 
-    assertEq(_treasuryCdao2After, _treasuryCdao2Before - (_treasuryUnumAfter - 30));
-    assertEq(_treasuryUnumAfter, _treasuryUnumBefore + (_treasuryCdao2Before - _treasuryCdao2After) + 30);
+    assertEq(_treasuryCdao2After, _treasuryCdao2Before - (_treasuryUnumAfter - 1.1 ether));
+    assertEq(_treasuryUnumAfter, _treasuryUnumBefore + (_treasuryCdao2Before - _treasuryCdao2After) + 1.1 ether);
   }
 
 
@@ -378,11 +377,11 @@ contract TestUnumOptinE2E is TestBaseWorkflow {
       JBLaunchProjectData memory launchProjectData
     )
   {
-    JB721TierParams[] memory tierParams = new JB721TierParams[](10);
+    JB721TierParams[] memory tierParams = new JB721TierParams[](4);
 
-    for (uint256 i; i < 10; i++) {
+    for (uint256 i; i < 4; i++) {
       tierParams[i] = JB721TierParams({
-        contributionFloor: uint80((i + 1) * 10),
+        contributionFloor: uint80(0.1 ether * 10**i),
         lockedUntil: uint48(0),
         initialQuantity: uint40(10),
         votingUnits: uint16((i + 1) * 10),
