@@ -17,7 +17,7 @@ contract DeployMainnet is Script {
     }
 }
 
-contract DeployGoerli {
+contract DeployGoerli is Script {
     IJBController _controller = IJBController(0x7Cb86D43B665196BC719b6974D320bf674AFb395);
 
     // Set me:
@@ -25,6 +25,7 @@ contract DeployGoerli {
     uint256 _projectIdToLeave = 283;
 
     function run() external {
+        vm.startBroadcast();
         UnumOptIn _optin = new UnumOptIn(_projectIdToOptIn, _projectIdToLeave, _controller);
         console.log(address(_optin));
     }
