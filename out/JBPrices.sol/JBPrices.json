@@ -1,0 +1,2837 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "prod1",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "denominator",
+          "type": "uint256"
+        }
+      ],
+      "name": "PRBMath__MulDivOverflow",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PRICE_FEED_ALREADY_EXISTS",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PRICE_FEED_NOT_FOUND",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "currency",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "base",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "contract IJBPriceFeed",
+          "name": "feed",
+          "type": "address"
+        }
+      ],
+      "name": "AddFeed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_currency",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_base",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IJBPriceFeed",
+          "name": "_feed",
+          "type": "address"
+        }
+      ],
+      "name": "addFeedFor",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "feedFor",
+      "outputs": [
+        {
+          "internalType": "contract IJBPriceFeed",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_currency",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_base",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_decimals",
+          "type": "uint256"
+        }
+      ],
+      "name": "priceFor",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x608060405234801561001057600080fd5b5060405161096538038061096583398101604081905261002f91610171565b61003833610047565b61004181610097565b506101a1565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b61009f610115565b6001600160a01b0381166101095760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b60648201526084015b60405180910390fd5b61011281610047565b50565b6000546001600160a01b0316331461016f5760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152606401610100565b565b60006020828403121561018357600080fd5b81516001600160a01b038116811461019a57600080fd5b9392505050565b6107b5806101b06000396000f3fe608060405234801561001057600080fd5b50600436106100625760003560e01c806315d63a9114610067578063715018a6146100b85780638da5cb5b146100c257806396364e6d146100d3578063a4d0caf2146100e6578063f2fde38b14610107575b600080fd5b61009b61007536600461058f565b60016020908152600092835260408084209091529082529020546001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b6100c061011a565b005b6000546001600160a01b031661009b565b6100c06100e13660046105c6565b61012e565b6100f96100f43660046105ff565b610214565b6040519081526020016100af565b6100c061011536600461062b565b61039a565b610122610418565b61012c6000610472565b565b610136610418565b60008381526001602090815260408083208584529091529020546001600160a01b0316151580610187575060008281526001602090815260408083208684529091529020546001600160a01b031615155b156101a55760405163d28d564f60e01b815260040160405180910390fd5b600083815260016020908152604080832085845282529182902080546001600160a01b0319166001600160a01b0385169081179091559151918252839185917f2809ef679fa4c20b88a6467f2660840ad173b5205fef76c270c5d7ba44cb7057910160405180910390a3505050565b600082840361022f5761022882600a610744565b9050610393565b60008481526001602090815260408083208684529091529020546001600160a01b031680156102c957604051637a3c4c1760e01b8152600481018490526001600160a01b03821690637a3c4c1790602401602060405180830381865afa15801561029d573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102c19190610750565b915050610393565b5060008381526001602090815260408083208784529091529020546001600160a01b0316801561037a576102c161030184600a610744565b61030c85600a610744565b604051637a3c4c1760e01b8152600481018790526001600160a01b03851690637a3c4c1790602401602060405180830381865afa158015610351573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103759190610750565b6104c2565b604051633ae4eae560e11b815260040160405180910390fd5b9392505050565b6103a2610418565b6001600160a01b03811661040c5760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b60648201526084015b60405180910390fd5b61041581610472565b50565b6000546001600160a01b0316331461012c5760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152606401610403565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b60008080600019858709858702925082811083820303915050806000036104fc578382816104f2576104f2610769565b0492505050610393565b83811061052657604051631dcf306360e21b81526004810182905260248101859052604401610403565b60008486880960026001871981018816978890046003810283188082028403028082028403028082028403028082028403028082028403029081029092039091026000889003889004909101858311909403939093029303949094049190911702949350505050565b600080604083850312156105a257600080fd5b50508035926020909101359150565b6001600160a01b038116811461041557600080fd5b6000806000606084860312156105db57600080fd5b833592506020840135915060408401356105f4816105b1565b809150509250925092565b60008060006060848603121561061457600080fd5b505081359360208301359350604090920135919050565b60006020828403121561063d57600080fd5b8135610393816105b1565b634e487b7160e01b600052601160045260246000fd5b600181815b8085111561069957816000190482111561067f5761067f610648565b8085161561068c57918102915b93841c9390800290610663565b509250929050565b6000826106b05750600161073e565b816106bd5750600061073e565b81600181146106d357600281146106dd576106f9565b600191505061073e565b60ff8411156106ee576106ee610648565b50506001821b61073e565b5060208310610133831016604e8410600b841016171561071c575081810a61073e565b610726838361065e565b806000190482111561073a5761073a610648565b0290505b92915050565b600061039383836106a1565b60006020828403121561076257600080fd5b5051919050565b634e487b7160e01b600052601260045260246000fdfea264697066735822122035d01e4663e2b4429b1c76edb5f4fe9ae6a0b35dae3a95b6839604abb67cb5d564736f6c63430008110033",
+    "sourceMap": "573:3914:61:-:0;;;3345:95;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;936:32:125;719:10:145;936:18:125;:32::i;:::-;3410:25:61;3428:6;3410:17;:25::i;:::-;3345:95;573:3914;;2433:187:125;2506:16;2525:6;;-1:-1:-1;;;;;2541:17:125;;;-1:-1:-1;;;;;;2541:17:125;;;;;;2573:40;;2525:6;;;;;;;2573:40;;2506:16;2573:40;2496:124;2433:187;:::o;2081:198::-;1094:13;:11;:13::i;:::-;-1:-1:-1;;;;;2169:22:125;::::1;2161:73;;;::::0;-1:-1:-1;;;2161:73:125;;511:2:156;2161:73:125::1;::::0;::::1;493:21:156::0;550:2;530:18;;;523:30;589:34;569:18;;;562:62;-1:-1:-1;;;640:18:156;;;633:36;686:19;;2161:73:125::1;;;;;;;;;2244:28;2263:8:::0;2244:18:::1;:28::i;:::-;2081:198:::0;:::o;1359:130::-;1247:7;1273:6;-1:-1:-1;;;;;1273:6:125;719:10:145;1422:23:125;1414:68;;;;-1:-1:-1;;;1414:68:125;;918:2:156;1414:68:125;;;900:21:156;;;937:18;;;930:30;996:34;976:18;;;969:62;1048:18;;1414:68:125;716:356:156;1414:68:125;1359:130::o;14:290:156:-;84:6;137:2;125:9;116:7;112:23;108:32;105:52;;;153:1;150;143:12;105:52;179:16;;-1:-1:-1;;;;;224:31:156;;214:42;;204:70;;270:1;267;260:12;204:70;293:5;14:290;-1:-1:-1;;;14:290:156:o;716:356::-;573:3914:61;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060405234801561001057600080fd5b50600436106100625760003560e01c806315d63a9114610067578063715018a6146100b85780638da5cb5b146100c257806396364e6d146100d3578063a4d0caf2146100e6578063f2fde38b14610107575b600080fd5b61009b61007536600461058f565b60016020908152600092835260408084209091529082529020546001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b6100c061011a565b005b6000546001600160a01b031661009b565b6100c06100e13660046105c6565b61012e565b6100f96100f43660046105ff565b610214565b6040519081526020016100af565b6100c061011536600461062b565b61039a565b610122610418565b61012c6000610472565b565b610136610418565b60008381526001602090815260408083208584529091529020546001600160a01b0316151580610187575060008281526001602090815260408083208684529091529020546001600160a01b031615155b156101a55760405163d28d564f60e01b815260040160405180910390fd5b600083815260016020908152604080832085845282529182902080546001600160a01b0319166001600160a01b0385169081179091559151918252839185917f2809ef679fa4c20b88a6467f2660840ad173b5205fef76c270c5d7ba44cb7057910160405180910390a3505050565b600082840361022f5761022882600a610744565b9050610393565b60008481526001602090815260408083208684529091529020546001600160a01b031680156102c957604051637a3c4c1760e01b8152600481018490526001600160a01b03821690637a3c4c1790602401602060405180830381865afa15801561029d573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102c19190610750565b915050610393565b5060008381526001602090815260408083208784529091529020546001600160a01b0316801561037a576102c161030184600a610744565b61030c85600a610744565b604051637a3c4c1760e01b8152600481018790526001600160a01b03851690637a3c4c1790602401602060405180830381865afa158015610351573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103759190610750565b6104c2565b604051633ae4eae560e11b815260040160405180910390fd5b9392505050565b6103a2610418565b6001600160a01b03811661040c5760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b60648201526084015b60405180910390fd5b61041581610472565b50565b6000546001600160a01b0316331461012c5760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152606401610403565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b60008080600019858709858702925082811083820303915050806000036104fc578382816104f2576104f2610769565b0492505050610393565b83811061052657604051631dcf306360e21b81526004810182905260248101859052604401610403565b60008486880960026001871981018816978890046003810283188082028403028082028403028082028403028082028403028082028403029081029092039091026000889003889004909101858311909403939093029303949094049190911702949350505050565b600080604083850312156105a257600080fd5b50508035926020909101359150565b6001600160a01b038116811461041557600080fd5b6000806000606084860312156105db57600080fd5b833592506020840135915060408401356105f4816105b1565b809150509250925092565b60008060006060848603121561061457600080fd5b505081359360208301359350604090920135919050565b60006020828403121561063d57600080fd5b8135610393816105b1565b634e487b7160e01b600052601160045260246000fd5b600181815b8085111561069957816000190482111561067f5761067f610648565b8085161561068c57918102915b93841c9390800290610663565b509250929050565b6000826106b05750600161073e565b816106bd5750600061073e565b81600181146106d357600281146106dd576106f9565b600191505061073e565b60ff8411156106ee576106ee610648565b50506001821b61073e565b5060208310610133831016604e8410600b841016171561071c575081810a61073e565b610726838361065e565b806000190482111561073a5761073a610648565b0290505b92915050565b600061039383836106a1565b60006020828403121561076257600080fd5b5051919050565b634e487b7160e01b600052601260045260246000fdfea264697066735822122035d01e4663e2b4429b1c76edb5f4fe9ae6a0b35dae3a95b6839604abb67cb5d564736f6c63430008110033",
+    "sourceMap": "573:3914:61:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1440:76;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;1440:76:61;;;;;;-1:-1:-1;;;;;453:32:156;;;435:51;;423:2;408:18;1440:76:61;;;;;;;;1831:101:125;;;:::i;:::-;;1201:85;1247:7;1273:6;-1:-1:-1;;;;;1273:6:125;1201:85;;4016:469:61;;;;;;:::i;:::-;;:::i;2206:836::-;;;;;;:::i;:::-;;:::i;:::-;;;1746:25:156;;;1734:2;1719:18;2206:836:61;1600:177:156;2081:198:125;;;;;;:::i;:::-;;:::i;1831:101::-;1094:13;:11;:13::i;:::-;1895:30:::1;1922:1;1895:18;:30::i;:::-;1831:101::o:0;4016:469:61:-;1094:13:125;:11;:13::i;:::-;4266:1:61::1;4216:18:::0;;;:7:::1;:18;::::0;;;;;;;:25;;;;;;;;;-1:-1:-1;;;;;4216:25:61::1;:53:::0;::::1;::::0;:116:::1;;-1:-1:-1::0;4329:1:61::1;4279:14:::0;;;:7:::1;:14;::::0;;;;;;;:25;;;;;;;;;-1:-1:-1;;;;;4279:25:61::1;:53:::0;::::1;4216:116;4205:168;;;4346:27;;-1:-1:-1::0;;;4346:27:61::1;;;;;;;;;;;4205:168;4403:18;::::0;;;:7:::1;:18;::::0;;;;;;;:25;;;;;;;;;:33;;-1:-1:-1;;;;;;4403:33:61::1;-1:-1:-1::0;;;;;4403:33:61;::::1;::::0;;::::1;::::0;;;4448:32;;435:51:156;;;4403:25:61;;:18;;4448:32:::1;::::0;408:18:156;4448:32:61::1;;;;;;;4016:469:::0;;;:::o;2206:836::-;2325:7;2474:5;2461:9;:18;2457:44;;2488:13;2492:9;2488:2;:13;:::i;:::-;2481:20;;;;2457:44;2544:18;2565;;;:7;:18;;;;;;;;:25;;;;;;;;;-1:-1:-1;;;;;2565:25:61;2640:33;;2636:75;;2682:29;;-1:-1:-1;;;2682:29:61;;;;;1746:25:156;;;-1:-1:-1;;;;;2682:18:61;;;;;1719::156;;2682:29:61;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;2675:36;;;;;2636:75;-1:-1:-1;2755:14:61;;;;:7;:14;;;;;;;;:25;;;;;;;;;-1:-1:-1;;;;;2755:25:61;2838:33;;2834:127;;2886:75;2901:13;2905:9;2901:2;:13;:::i;:::-;2916;2920:9;2916:2;:13;:::i;:::-;2931:29;;-1:-1:-1;;;2931:29:61;;;;;1746:25:156;;;-1:-1:-1;;;;;2931:18:61;;;;;1719::156;;2931:29:61;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;2886:14;:75::i;2834:127::-;3015:22;;-1:-1:-1;;;3015:22:61;;;;;;;;;;;2206:836;;;;;;:::o;2081:198:125:-;1094:13;:11;:13::i;:::-;-1:-1:-1;;;;;2169:22:125;::::1;2161:73;;;::::0;-1:-1:-1;;;2161:73:125;;3945:2:156;2161:73:125::1;::::0;::::1;3927:21:156::0;3984:2;3964:18;;;3957:30;4023:34;4003:18;;;3996:62;-1:-1:-1;;;4074:18:156;;;4067:36;4120:19;;2161:73:125::1;;;;;;;;;2244:28;2263:8;2244:18;:28::i;:::-;2081:198:::0;:::o;1359:130::-;1247:7;1273:6;-1:-1:-1;;;;;1273:6:125;719:10:145;1422:23:125;1414:68;;;;-1:-1:-1;;;1414:68:125;;4352:2:156;1414:68:125;;;4334:21:156;;;4371:18;;;4364:30;4430:34;4410:18;;;4403:62;4482:18;;1414:68:125;4150:356:156;2433:187:125;2506:16;2525:6;;-1:-1:-1;;;;;2541:17:125;;;-1:-1:-1;;;;;;2541:17:125;;;;;;2573:40;;2525:6;;;;;;;2573:40;;2506:16;2573:40;2496:124;2433:187;:::o;15079:3983:155:-;15191:14;;;-1:-1:-1;;15680:1:155;15677;15670:20;15719:1;15716;15712:9;15703:18;;15770:5;15766:2;15763:13;15755:5;15751:2;15747:14;15743:34;15734:43;;;15860:5;15869:1;15860:10;15856:138;;15931:11;15923:5;:19;;;;;:::i;:::-;;15914:28;;15970:13;;;;15856:138;16101:11;16092:5;:20;16088:101;;16135:43;;-1:-1:-1;;;16135:43:155;;;;;4817:25:156;;;4858:18;;;4851:34;;;4790:18;;16135:43:155;4643:248:156;16088:101:155;16424:17;16547:11;16544:1;16541;16534:25;17956:1;17093;17078:12;;:16;;17063:32;;17201:25;;;;17937:1;:15;;17936:21;;18189;;;18185:25;;18174:36;18258:21;;;18254:25;;18243:36;18328:21;;;18324:25;;18313:36;18398:21;;;18394:25;;18383:36;18468:21;;;18464:25;;18453:36;18539:21;;;18535:25;;;18524:36;;;17045:15;17467;;;17463:29;;;17459:37;;;16653:20;;;16642:32;;;17585:15;;;;16696:21;;17305:19;;;;17576:24;;;;19003:15;;;-1:-1:-1;;;;15079:3983:155:o;14:248:156:-;82:6;90;143:2;131:9;122:7;118:23;114:32;111:52;;;159:1;156;149:12;111:52;-1:-1:-1;;182:23:156;;;252:2;237:18;;;224:32;;-1:-1:-1;14:248:156:o;705:145::-;-1:-1:-1;;;;;794:31:156;;784:42;;774:70;;840:1;837;830:12;855:419;954:6;962;970;1023:2;1011:9;1002:7;998:23;994:32;991:52;;;1039:1;1036;1029:12;991:52;1075:9;1062:23;1052:33;;1132:2;1121:9;1117:18;1104:32;1094:42;;1186:2;1175:9;1171:18;1158:32;1199:45;1238:5;1199:45;:::i;:::-;1263:5;1253:15;;;855:419;;;;;:::o;1279:316::-;1356:6;1364;1372;1425:2;1413:9;1404:7;1400:23;1396:32;1393:52;;;1441:1;1438;1431:12;1393:52;-1:-1:-1;;1464:23:156;;;1534:2;1519:18;;1506:32;;-1:-1:-1;1585:2:156;1570:18;;;1557:32;;1279:316;-1:-1:-1;1279:316:156:o;1782:261::-;1841:6;1894:2;1882:9;1873:7;1869:23;1865:32;1862:52;;;1910:1;1907;1900:12;1862:52;1949:9;1936:23;1968:45;2007:5;1968:45;:::i;2048:127::-;2109:10;2104:3;2100:20;2097:1;2090:31;2140:4;2137:1;2130:15;2164:4;2161:1;2154:15;2180:422;2269:1;2312:5;2269:1;2326:270;2347:7;2337:8;2334:21;2326:270;;;2406:4;2402:1;2398:6;2394:17;2388:4;2385:27;2382:53;;;2415:18;;:::i;:::-;2465:7;2455:8;2451:22;2448:55;;;2485:16;;;;2448:55;2564:22;;;;2524:15;;;;2326:270;;;2330:3;2180:422;;;;;:::o;2607:806::-;2656:5;2686:8;2676:80;;-1:-1:-1;2727:1:156;2741:5;;2676:80;2775:4;2765:76;;-1:-1:-1;2812:1:156;2826:5;;2765:76;2857:4;2875:1;2870:59;;;;2943:1;2938:130;;;;2850:218;;2870:59;2900:1;2891:10;;2914:5;;;2938:130;2975:3;2965:8;2962:17;2959:43;;;2982:18;;:::i;:::-;-1:-1:-1;;3038:1:156;3024:16;;3053:5;;2850:218;;3152:2;3142:8;3139:16;3133:3;3127:4;3124:13;3120:36;3114:2;3104:8;3101:16;3096:2;3090:4;3087:12;3083:35;3080:77;3077:159;;;-1:-1:-1;3189:19:156;;;3221:5;;3077:159;3268:34;3293:8;3287:4;3268:34;:::i;:::-;3338:6;3334:1;3330:6;3326:19;3317:7;3314:32;3311:58;;;3349:18;;:::i;:::-;3387:20;;-1:-1:-1;2607:806:156;;;;;:::o;3418:131::-;3478:5;3507:36;3534:8;3528:4;3507:36;:::i;3554:184::-;3624:6;3677:2;3665:9;3656:7;3652:23;3648:32;3645:52;;;3693:1;3690;3683:12;3645:52;-1:-1:-1;3716:16:156;;3554:184;-1:-1:-1;3554:184:156:o;4511:127::-;4572:10;4567:3;4563:20;4560:1;4553:31;4603:4;4600:1;4593:15;4627:4;4624:1;4617:15",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "addFeedFor(uint256,uint256,address)": "96364e6d",
+    "feedFor(uint256,uint256)": "15d63a91",
+    "owner()": "8da5cb5b",
+    "priceFor(uint256,uint256,uint256)": "a4d0caf2",
+    "renounceOwnership()": "715018a6",
+    "transferOwnership(address)": "f2fde38b"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"prod1\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"denominator\",\"type\":\"uint256\"}],\"name\":\"PRBMath__MulDivOverflow\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"PRICE_FEED_ALREADY_EXISTS\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"PRICE_FEED_NOT_FOUND\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"currency\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"base\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"contract IJBPriceFeed\",\"name\":\"feed\",\"type\":\"address\"}],\"name\":\"AddFeed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_currency\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_base\",\"type\":\"uint256\"},{\"internalType\":\"contract IJBPriceFeed\",\"name\":\"_feed\",\"type\":\"address\"}],\"name\":\"addFeedFor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"feedFor\",\"outputs\":[{\"internalType\":\"contract IJBPriceFeed\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_currency\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_base\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_decimals\",\"type\":\"uint256\"}],\"name\":\"priceFor\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Adheres to - IJBPrices: General interface for the methods in this contract that interact with the blockchain's state according to the protocol's rules.Inherits from - Ownable: Includes convenience functionality for checking a message sender's permissions before executing certain transactions.\",\"kind\":\"dev\",\"methods\":{\"addFeedFor(uint256,uint256,address)\":{\"details\":\"Current feeds can't be modified.\",\"params\":{\"_base\":\"The base currency unit being priced by the feed.\",\"_currency\":\"The currency units the feed's resulting price is in terms of.\",\"_feed\":\"The price feed being added.\"}},\"constructor\":{\"params\":{\"_owner\":\"The address that will own the contract.\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"priceFor(uint256,uint256,uint256)\":{\"params\":{\"_base\":\"The base currency unit being priced.\",\"_currency\":\"The currency units the resulting price is in terms of.\",\"_decimals\":\"The number of decimals the returned fixed point price should include.\"},\"returns\":{\"_0\":\"The price of the currency in terms of the base, as a fixed point number with the specified number of decimals.\"}},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"stateVariables\":{\"feedFor\":{\"details\":\"The feed returns the number of `_currency` units that can be converted to 1 `_base` unit. _currency The currency units the feed's resulting price is in terms of. _base The base currency unit being priced by the feed.\"}},\"version\":1},\"userdoc\":{\"errors\":{\"PRBMath__MulDivOverflow(uint256,uint256)\":[{\"notice\":\"Emitted when the result overflows uint256.\"}]},\"kind\":\"user\",\"methods\":{\"addFeedFor(uint256,uint256,address)\":{\"notice\":\" Add a price feed for a currency in terms of the provided base currency.\"},\"feedFor(uint256,uint256)\":{\"notice\":\" The available price feeds.\"},\"priceFor(uint256,uint256,uint256)\":{\"notice\":\"Gets the number of `_currency` units that can be converted to 1 `_base` unit.\"}},\"notice\":\" Manages and normalizes price feeds.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@jbx-protocol/juice-contracts-v3/contracts/JBPrices.sol\":\"JBPrices\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@jbx-protocol/=node_modules/@jbx-protocol/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":@paulrberg/=node_modules/@paulrberg/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":forge-std/=lib/forge-std/src/\",\":prb-math/=node_modules/prb-math/\"]},\"sources\":{\"node_modules/@jbx-protocol/juice-contracts-v3/contracts/JBPrices.sol\":{\"keccak256\":\"0x10a970373b21944efb41ab98177413884ea6742e2624a112713d56f7b1d80da3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://10eea97b5a1460e0da4fc0538621559f90e772d9ec7f03eee5767747f658868b\",\"dweb:/ipfs/QmXBPDEdmvnkrBbgDepEhWnUfnhNwd1NYrfvp6ys8Z6EA7\"]},\"node_modules/@jbx-protocol/juice-contracts-v3/contracts/interfaces/IJBPriceFeed.sol\":{\"keccak256\":\"0x57c71282fec1b34b00cf991ffed2e36031c393e35bfa7ca5d723eb6572fb7122\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f51c97ac194d3120a2fb5428eeeff759b75b7cbc5708465afc914619016a7c9b\",\"dweb:/ipfs/QmemTqsGqoPqG97EsdRTMAbB6RfCz8CJxGYPNnDTV6LJ2t\"]},\"node_modules/@jbx-protocol/juice-contracts-v3/contracts/interfaces/IJBPrices.sol\":{\"keccak256\":\"0x82a175b1f4b95b506c98406576cd59cbe04615e3df24f9cf3587b61b8ee323b1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5493e394cf47fca51a4091f1e6d285cc9e4ff9916e5bdfb8e174fe652a2b9833\",\"dweb:/ipfs/QmTXafZatcjYbNMpUYYk1AWNZLkRFK7VVdAYYudGf4z3HJ\"]},\"node_modules/@openzeppelin/contracts/access/Ownable.sol\":{\"keccak256\":\"0xa94b34880e3c1b0b931662cb1c09e5dfa6662f31cba80e07c5ee71cd135c9673\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://40fb1b5102468f783961d0af743f91b9980cf66b50d1d12009f6bb1869cea4d2\",\"dweb:/ipfs/QmYqEbJML4jB1GHbzD4cUZDtJg5wVwNm3vDJq1GbyDus8y\"]},\"node_modules/@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92\",\"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3\"]},\"node_modules/@paulrberg/contracts/math/PRBMath.sol\":{\"keccak256\":\"0x42821345981bc0434a90ba2268a2f5278dfe9e38166981d72fc7f3b776a29495\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://92f28eea1e22d4e7998617483eef42d89eb97b364414cf41041c86aa633d3b47\",\"dweb:/ipfs/QmT5entVZFjbb3ZGZZvNAGqtwerCgwjCfN1Qmvf8jKPBXj\"]},\"node_modules/prb-math/contracts/PRBMath.sol\":{\"keccak256\":\"0xed164c95012964f5e125b5d2b2d00471a4bdee4def618cd1fcf341d196011b61\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://3ba3ad78675323279adfc09038eaa14f4cde3f3173e5d2d60b9c30bf7099aa7b\",\"dweb:/ipfs/QmV56KGJZQG681hwd7JQDv3KjAa9JSGF88ShGx8YBCuvcR\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.17+commit.8df45f5f"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_owner",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "prod1",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "denominator",
+              "type": "uint256"
+            }
+          ],
+          "type": "error",
+          "name": "PRBMath__MulDivOverflow"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "PRICE_FEED_ALREADY_EXISTS"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "PRICE_FEED_NOT_FOUND"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "currency",
+              "type": "uint256",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "base",
+              "type": "uint256",
+              "indexed": true
+            },
+            {
+              "internalType": "contract IJBPriceFeed",
+              "name": "feed",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "AddFeed",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_currency",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_base",
+              "type": "uint256"
+            },
+            {
+              "internalType": "contract IJBPriceFeed",
+              "name": "_feed",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "addFeedFor"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "feedFor",
+          "outputs": [
+            {
+              "internalType": "contract IJBPriceFeed",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "owner",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_currency",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_base",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_decimals",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "priceFor",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "renounceOwnership"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "transferOwnership"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "addFeedFor(uint256,uint256,address)": {
+            "details": "Current feeds can't be modified.",
+            "params": {
+              "_base": "The base currency unit being priced by the feed.",
+              "_currency": "The currency units the feed's resulting price is in terms of.",
+              "_feed": "The price feed being added."
+            }
+          },
+          "constructor": {
+            "params": {
+              "_owner": "The address that will own the contract."
+            }
+          },
+          "owner()": {
+            "details": "Returns the address of the current owner."
+          },
+          "priceFor(uint256,uint256,uint256)": {
+            "params": {
+              "_base": "The base currency unit being priced.",
+              "_currency": "The currency units the resulting price is in terms of.",
+              "_decimals": "The number of decimals the returned fixed point price should include."
+            },
+            "returns": {
+              "_0": "The price of the currency in terms of the base, as a fixed point number with the specified number of decimals."
+            }
+          },
+          "renounceOwnership()": {
+            "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+          },
+          "transferOwnership(address)": {
+            "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "addFeedFor(uint256,uint256,address)": {
+            "notice": " Add a price feed for a currency in terms of the provided base currency."
+          },
+          "feedFor(uint256,uint256)": {
+            "notice": " The available price feeds."
+          },
+          "priceFor(uint256,uint256,uint256)": {
+            "notice": "Gets the number of `_currency` units that can be converted to 1 `_base` unit."
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@jbx-protocol/=node_modules/@jbx-protocol/",
+        ":@openzeppelin/=node_modules/@openzeppelin/",
+        ":@paulrberg/=node_modules/@paulrberg/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":forge-std/=lib/forge-std/src/",
+        ":prb-math/=node_modules/prb-math/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@jbx-protocol/juice-contracts-v3/contracts/JBPrices.sol": "JBPrices"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@jbx-protocol/juice-contracts-v3/contracts/JBPrices.sol": {
+        "keccak256": "0x10a970373b21944efb41ab98177413884ea6742e2624a112713d56f7b1d80da3",
+        "urls": [
+          "bzz-raw://10eea97b5a1460e0da4fc0538621559f90e772d9ec7f03eee5767747f658868b",
+          "dweb:/ipfs/QmXBPDEdmvnkrBbgDepEhWnUfnhNwd1NYrfvp6ys8Z6EA7"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@jbx-protocol/juice-contracts-v3/contracts/interfaces/IJBPriceFeed.sol": {
+        "keccak256": "0x57c71282fec1b34b00cf991ffed2e36031c393e35bfa7ca5d723eb6572fb7122",
+        "urls": [
+          "bzz-raw://f51c97ac194d3120a2fb5428eeeff759b75b7cbc5708465afc914619016a7c9b",
+          "dweb:/ipfs/QmemTqsGqoPqG97EsdRTMAbB6RfCz8CJxGYPNnDTV6LJ2t"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@jbx-protocol/juice-contracts-v3/contracts/interfaces/IJBPrices.sol": {
+        "keccak256": "0x82a175b1f4b95b506c98406576cd59cbe04615e3df24f9cf3587b61b8ee323b1",
+        "urls": [
+          "bzz-raw://5493e394cf47fca51a4091f1e6d285cc9e4ff9916e5bdfb8e174fe652a2b9833",
+          "dweb:/ipfs/QmTXafZatcjYbNMpUYYk1AWNZLkRFK7VVdAYYudGf4z3HJ"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+        "keccak256": "0xa94b34880e3c1b0b931662cb1c09e5dfa6662f31cba80e07c5ee71cd135c9673",
+        "urls": [
+          "bzz-raw://40fb1b5102468f783961d0af743f91b9980cf66b50d1d12009f6bb1869cea4d2",
+          "dweb:/ipfs/QmYqEbJML4jB1GHbzD4cUZDtJg5wVwNm3vDJq1GbyDus8y"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@openzeppelin/contracts/utils/Context.sol": {
+        "keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+        "urls": [
+          "bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+          "dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@paulrberg/contracts/math/PRBMath.sol": {
+        "keccak256": "0x42821345981bc0434a90ba2268a2f5278dfe9e38166981d72fc7f3b776a29495",
+        "urls": [
+          "bzz-raw://92f28eea1e22d4e7998617483eef42d89eb97b364414cf41041c86aa633d3b47",
+          "dweb:/ipfs/QmT5entVZFjbb3ZGZZvNAGqtwerCgwjCfN1Qmvf8jKPBXj"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/prb-math/contracts/PRBMath.sol": {
+        "keccak256": "0xed164c95012964f5e125b5d2b2d00471a4bdee4def618cd1fcf341d196011b61",
+        "urls": [
+          "bzz-raw://3ba3ad78675323279adfc09038eaa14f4cde3f3173e5d2d60b9c30bf7099aa7b",
+          "dweb:/ipfs/QmV56KGJZQG681hwd7JQDv3KjAa9JSGF88ShGx8YBCuvcR"
+        ],
+        "license": "Unlicense"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@jbx-protocol/juice-contracts-v3/contracts/JBPrices.sol",
+    "id": 40269,
+    "exportedSymbols": {
+      "Context": [
+        55294
+      ],
+      "IJBPriceFeed": [
+        47891
+      ],
+      "IJBPrices": [
+        47935
+      ],
+      "JBPrices": [
+        40268
+      ],
+      "Ownable": [
+        49947
+      ],
+      "PRBMath": [
+        60397
+      ],
+      "PRBMathSD59x18__AbsInputTooSmall": [
+        58528
+      ],
+      "PRBMathSD59x18__CeilOverflow": [
+        58533
+      ],
+      "PRBMathSD59x18__DivInputTooSmall": [
+        58536
+      ],
+      "PRBMathSD59x18__DivOverflow": [
+        58541
+      ],
+      "PRBMathSD59x18__Exp2InputTooBig": [
+        58551
+      ],
+      "PRBMathSD59x18__ExpInputTooBig": [
+        58546
+      ],
+      "PRBMathSD59x18__FloorUnderflow": [
+        58556
+      ],
+      "PRBMathSD59x18__FromIntOverflow": [
+        58561
+      ],
+      "PRBMathSD59x18__FromIntUnderflow": [
+        58566
+      ],
+      "PRBMathSD59x18__GmNegativeProduct": [
+        58573
+      ],
+      "PRBMathSD59x18__GmOverflow": [
+        58580
+      ],
+      "PRBMathSD59x18__LogInputTooSmall": [
+        58585
+      ],
+      "PRBMathSD59x18__MulInputTooSmall": [
+        58588
+      ],
+      "PRBMathSD59x18__MulOverflow": [
+        58593
+      ],
+      "PRBMathSD59x18__PowuOverflow": [
+        58598
+      ],
+      "PRBMathSD59x18__SqrtNegativeInput": [
+        58603
+      ],
+      "PRBMathSD59x18__SqrtOverflow": [
+        58608
+      ],
+      "PRBMathUD60x18__AddOverflow": [
+        58615
+      ],
+      "PRBMathUD60x18__CeilOverflow": [
+        58620
+      ],
+      "PRBMathUD60x18__Exp2InputTooBig": [
+        58630
+      ],
+      "PRBMathUD60x18__ExpInputTooBig": [
+        58625
+      ],
+      "PRBMathUD60x18__FromUintOverflow": [
+        58635
+      ],
+      "PRBMathUD60x18__GmOverflow": [
+        58642
+      ],
+      "PRBMathUD60x18__LogInputTooSmall": [
+        58647
+      ],
+      "PRBMathUD60x18__SqrtOverflow": [
+        58652
+      ],
+      "PRBMathUD60x18__SubUnderflow": [
+        58659
+      ],
+      "PRBMath__MulDivFixedPointOverflow": [
+        58510
+      ],
+      "PRBMath__MulDivOverflow": [
+        58517
+      ],
+      "PRBMath__MulDivSignedInputTooSmall": [
+        58520
+      ],
+      "PRBMath__MulDivSignedOverflow": [
+        58525
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "32:4456:61",
+    "nodes": [
+      {
+        "id": 40098,
+        "nodeType": "PragmaDirective",
+        "src": "32:24:61",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".16"
+        ]
+      },
+      {
+        "id": 40099,
+        "nodeType": "ImportDirective",
+        "src": "58:52:61",
+        "nodes": [],
+        "absolutePath": "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "file": "@openzeppelin/contracts/access/Ownable.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 40269,
+        "sourceUnit": 49948,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 40100,
+        "nodeType": "ImportDirective",
+        "src": "111:47:61",
+        "nodes": [],
+        "absolutePath": "node_modules/@paulrberg/contracts/math/PRBMath.sol",
+        "file": "@paulrberg/contracts/math/PRBMath.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 40269,
+        "sourceUnit": 58504,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 40101,
+        "nodeType": "ImportDirective",
+        "src": "159:36:61",
+        "nodes": [],
+        "absolutePath": "node_modules/@jbx-protocol/juice-contracts-v3/contracts/interfaces/IJBPrices.sol",
+        "file": "./interfaces/IJBPrices.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 40269,
+        "sourceUnit": 47936,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 40268,
+        "nodeType": "ContractDefinition",
+        "src": "573:3914:61",
+        "nodes": [
+          {
+            "id": 40108,
+            "nodeType": "ErrorDefinition",
+            "src": "845:34:61",
+            "nodes": [],
+            "errorSelector": "d28d564f",
+            "name": "PRICE_FEED_ALREADY_EXISTS",
+            "nameLocation": "851:25:61",
+            "parameters": {
+              "id": 40107,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "876:2:61"
+            }
+          },
+          {
+            "id": 40110,
+            "nodeType": "ErrorDefinition",
+            "src": "882:29:61",
+            "nodes": [],
+            "errorSelector": "75c9d5ca",
+            "name": "PRICE_FEED_NOT_FOUND",
+            "nameLocation": "888:20:61",
+            "parameters": {
+              "id": 40109,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "908:2:61"
+            }
+          },
+          {
+            "id": 40119,
+            "nodeType": "VariableDeclaration",
+            "src": "1440:76:61",
+            "nodes": [],
+            "baseFunctions": [
+              47913
+            ],
+            "constant": false,
+            "documentation": {
+              "id": 40111,
+              "nodeType": "StructuredDocumentation",
+              "src": "1144:293:61",
+              "text": "@notice \nThe available price feeds.\n@dev\nThe feed returns the number of `_currency` units that can be converted to 1 `_base` unit.\n_currency The currency units the feed's resulting price is in terms of.\n_base The base currency unit being priced by the feed."
+            },
+            "functionSelector": "15d63a91",
+            "mutability": "mutable",
+            "name": "feedFor",
+            "nameLocation": "1509:7:61",
+            "overrides": {
+              "id": 40118,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1500:8:61"
+            },
+            "scope": 40268,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$_$",
+              "typeString": "mapping(uint256 => mapping(uint256 => contract IJBPriceFeed))"
+            },
+            "typeName": {
+              "id": 40117,
+              "keyType": {
+                "id": 40112,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1448:7:61",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1440:52:61",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$_$",
+                "typeString": "mapping(uint256 => mapping(uint256 => contract IJBPriceFeed))"
+              },
+              "valueType": {
+                "id": 40116,
+                "keyType": {
+                  "id": 40113,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1467:7:61",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "nodeType": "Mapping",
+                "src": "1459:32:61",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$",
+                  "typeString": "mapping(uint256 => contract IJBPriceFeed)"
+                },
+                "valueType": {
+                  "id": 40115,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 40114,
+                    "name": "IJBPriceFeed",
+                    "nameLocations": [
+                      "1478:12:61"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 47891,
+                    "src": "1478:12:61"
+                  },
+                  "referencedDeclaration": 47891,
+                  "src": "1478:12:61",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                    "typeString": "contract IJBPriceFeed"
+                  }
+                }
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "id": 40198,
+            "nodeType": "FunctionDefinition",
+            "src": "2206:836:61",
+            "nodes": [],
+            "body": {
+              "id": 40197,
+              "nodeType": "Block",
+              "src": "2334:708:61",
+              "nodes": [],
+              "statements": [
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 40134,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 40132,
+                      "name": "_currency",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 40122,
+                      "src": "2461:9:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "==",
+                    "rightExpression": {
+                      "id": 40133,
+                      "name": "_base",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 40124,
+                      "src": "2474:5:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "2461:18:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 40139,
+                  "nodeType": "IfStatement",
+                  "src": "2457:44:61",
+                  "trueBody": {
+                    "expression": {
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 40137,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "hexValue": "3130",
+                        "id": 40135,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2488:2:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_10_by_1",
+                          "typeString": "int_const 10"
+                        },
+                        "value": "10"
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "**",
+                      "rightExpression": {
+                        "id": 40136,
+                        "name": "_decimals",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 40126,
+                        "src": "2492:9:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "src": "2488:13:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "functionReturnParameters": 40131,
+                    "id": 40138,
+                    "nodeType": "Return",
+                    "src": "2481:20:61"
+                  }
+                },
+                {
+                  "assignments": [
+                    40142
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 40142,
+                      "mutability": "mutable",
+                      "name": "_feed",
+                      "nameLocation": "2557:5:61",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 40197,
+                      "src": "2544:18:61",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                        "typeString": "contract IJBPriceFeed"
+                      },
+                      "typeName": {
+                        "id": 40141,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 40140,
+                          "name": "IJBPriceFeed",
+                          "nameLocations": [
+                            "2544:12:61"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 47891,
+                          "src": "2544:12:61"
+                        },
+                        "referencedDeclaration": 47891,
+                        "src": "2544:12:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                          "typeString": "contract IJBPriceFeed"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 40148,
+                  "initialValue": {
+                    "baseExpression": {
+                      "baseExpression": {
+                        "id": 40143,
+                        "name": "feedFor",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 40119,
+                        "src": "2565:7:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$_$",
+                          "typeString": "mapping(uint256 => mapping(uint256 => contract IJBPriceFeed))"
+                        }
+                      },
+                      "id": 40145,
+                      "indexExpression": {
+                        "id": 40144,
+                        "name": "_currency",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 40122,
+                        "src": "2573:9:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "2565:18:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$",
+                        "typeString": "mapping(uint256 => contract IJBPriceFeed)"
+                      }
+                    },
+                    "id": 40147,
+                    "indexExpression": {
+                      "id": 40146,
+                      "name": "_base",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 40124,
+                      "src": "2584:5:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "2565:25:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                      "typeString": "contract IJBPriceFeed"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2544:46:61"
+                },
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                      "typeString": "contract IJBPriceFeed"
+                    },
+                    "id": 40156,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 40149,
+                      "name": "_feed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 40142,
+                      "src": "2640:5:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                        "typeString": "contract IJBPriceFeed"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "!=",
+                    "rightExpression": {
+                      "arguments": [
+                        {
+                          "arguments": [
+                            {
+                              "hexValue": "30",
+                              "id": 40153,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "2670:1:61",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              },
+                              "value": "0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              }
+                            ],
+                            "id": 40152,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "2662:7:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": {
+                              "id": 40151,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "2662:7:61",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 40154,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2662:10:61",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 40150,
+                        "name": "IJBPriceFeed",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 47891,
+                        "src": "2649:12:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_IJBPriceFeed_$47891_$",
+                          "typeString": "type(contract IJBPriceFeed)"
+                        }
+                      },
+                      "id": 40155,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2649:24:61",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                        "typeString": "contract IJBPriceFeed"
+                      }
+                    },
+                    "src": "2640:33:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 40162,
+                  "nodeType": "IfStatement",
+                  "src": "2636:75:61",
+                  "trueBody": {
+                    "expression": {
+                      "arguments": [
+                        {
+                          "id": 40159,
+                          "name": "_decimals",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 40126,
+                          "src": "2701:9:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "expression": {
+                          "id": 40157,
+                          "name": "_feed",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 40142,
+                          "src": "2682:5:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                            "typeString": "contract IJBPriceFeed"
+                          }
+                        },
+                        "id": 40158,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "2688:12:61",
+                        "memberName": "currentPrice",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 47890,
+                        "src": "2682:18:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$_t_uint256_$returns$_t_uint256_$",
+                          "typeString": "function (uint256) view external returns (uint256)"
+                        }
+                      },
+                      "id": 40160,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2682:29:61",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "functionReturnParameters": 40131,
+                    "id": 40161,
+                    "nodeType": "Return",
+                    "src": "2675:36:61"
+                  }
+                },
+                {
+                  "expression": {
+                    "id": 40169,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 40163,
+                      "name": "_feed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 40142,
+                      "src": "2747:5:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                        "typeString": "contract IJBPriceFeed"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "baseExpression": {
+                        "baseExpression": {
+                          "id": 40164,
+                          "name": "feedFor",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 40119,
+                          "src": "2755:7:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$_$",
+                            "typeString": "mapping(uint256 => mapping(uint256 => contract IJBPriceFeed))"
+                          }
+                        },
+                        "id": 40166,
+                        "indexExpression": {
+                          "id": 40165,
+                          "name": "_base",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 40124,
+                          "src": "2763:5:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "2755:14:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$",
+                          "typeString": "mapping(uint256 => contract IJBPriceFeed)"
+                        }
+                      },
+                      "id": 40168,
+                      "indexExpression": {
+                        "id": 40167,
+                        "name": "_currency",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 40122,
+                        "src": "2770:9:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "2755:25:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                        "typeString": "contract IJBPriceFeed"
+                      }
+                    },
+                    "src": "2747:33:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                      "typeString": "contract IJBPriceFeed"
+                    }
+                  },
+                  "id": 40170,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2747:33:61"
+                },
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                      "typeString": "contract IJBPriceFeed"
+                    },
+                    "id": 40178,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 40171,
+                      "name": "_feed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 40142,
+                      "src": "2838:5:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                        "typeString": "contract IJBPriceFeed"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "!=",
+                    "rightExpression": {
+                      "arguments": [
+                        {
+                          "arguments": [
+                            {
+                              "hexValue": "30",
+                              "id": 40175,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "2868:1:61",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              },
+                              "value": "0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              }
+                            ],
+                            "id": 40174,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "2860:7:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": {
+                              "id": 40173,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "2860:7:61",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 40176,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2860:10:61",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 40172,
+                        "name": "IJBPriceFeed",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 47891,
+                        "src": "2847:12:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_IJBPriceFeed_$47891_$",
+                          "typeString": "type(contract IJBPriceFeed)"
+                        }
+                      },
+                      "id": 40177,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2847:24:61",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                        "typeString": "contract IJBPriceFeed"
+                      }
+                    },
+                    "src": "2838:33:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 40193,
+                  "nodeType": "IfStatement",
+                  "src": "2834:127:61",
+                  "trueBody": {
+                    "expression": {
+                      "arguments": [
+                        {
+                          "commonType": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          "id": 40183,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "hexValue": "3130",
+                            "id": 40181,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "2901:2:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_10_by_1",
+                              "typeString": "int_const 10"
+                            },
+                            "value": "10"
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "**",
+                          "rightExpression": {
+                            "id": 40182,
+                            "name": "_decimals",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 40126,
+                            "src": "2905:9:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "src": "2901:13:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        {
+                          "commonType": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          "id": 40186,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "hexValue": "3130",
+                            "id": 40184,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "2916:2:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_10_by_1",
+                              "typeString": "int_const 10"
+                            },
+                            "value": "10"
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "**",
+                          "rightExpression": {
+                            "id": 40185,
+                            "name": "_decimals",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 40126,
+                            "src": "2920:9:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "src": "2916:13:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        {
+                          "arguments": [
+                            {
+                              "id": 40189,
+                              "name": "_decimals",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 40126,
+                              "src": "2950:9:61",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            ],
+                            "expression": {
+                              "id": 40187,
+                              "name": "_feed",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 40142,
+                              "src": "2931:5:61",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                                "typeString": "contract IJBPriceFeed"
+                              }
+                            },
+                            "id": 40188,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "2937:12:61",
+                            "memberName": "currentPrice",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 47890,
+                            "src": "2931:18:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_external_view$_t_uint256_$returns$_t_uint256_$",
+                              "typeString": "function (uint256) view external returns (uint256)"
+                            }
+                          },
+                          "id": 40190,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2931:29:61",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "expression": {
+                          "id": 40179,
+                          "name": "PRBMath",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 60397,
+                          "src": "2886:7:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_PRBMath_$60397_$",
+                            "typeString": "type(library PRBMath)"
+                          }
+                        },
+                        "id": 40180,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "2894:6:61",
+                        "memberName": "mulDiv",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 59986,
+                        "src": "2886:14:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_uint256_$returns$_t_uint256_$",
+                          "typeString": "function (uint256,uint256,uint256) pure returns (uint256)"
+                        }
+                      },
+                      "id": 40191,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2886:75:61",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "functionReturnParameters": 40131,
+                    "id": 40192,
+                    "nodeType": "Return",
+                    "src": "2879:82:61"
+                  }
+                },
+                {
+                  "errorCall": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "id": 40194,
+                      "name": "PRICE_FEED_NOT_FOUND",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 40110,
+                      "src": "3015:20:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_error_pure$__$returns$__$",
+                        "typeString": "function () pure"
+                      }
+                    },
+                    "id": 40195,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "3015:22:61",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 40196,
+                  "nodeType": "RevertStatement",
+                  "src": "3008:29:61"
+                }
+              ]
+            },
+            "baseFunctions": [
+              47924
+            ],
+            "documentation": {
+              "id": 40120,
+              "nodeType": "StructuredDocumentation",
+              "src": "1750:453:61",
+              "text": "@notice\nGets the number of `_currency` units that can be converted to 1 `_base` unit.\n@param _currency The currency units the resulting price is in terms of.\n@param _base The base currency unit being priced.\n@param _decimals The number of decimals the returned fixed point price should include.\n@return The price of the currency in terms of the base, as a fixed point number with the specified number of decimals."
+            },
+            "functionSelector": "a4d0caf2",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "priceFor",
+            "nameLocation": "2215:8:61",
+            "overrides": {
+              "id": 40128,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "2307:8:61"
+            },
+            "parameters": {
+              "id": 40127,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40122,
+                  "mutability": "mutable",
+                  "name": "_currency",
+                  "nameLocation": "2237:9:61",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40198,
+                  "src": "2229:17:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 40121,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2229:7:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 40124,
+                  "mutability": "mutable",
+                  "name": "_base",
+                  "nameLocation": "2260:5:61",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40198,
+                  "src": "2252:13:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 40123,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2252:7:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 40126,
+                  "mutability": "mutable",
+                  "name": "_decimals",
+                  "nameLocation": "2279:9:61",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40198,
+                  "src": "2271:17:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 40125,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2271:7:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2223:69:61"
+            },
+            "returnParameters": {
+              "id": 40131,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40130,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40198,
+                  "src": "2325:7:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 40129,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2325:7:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2324:9:61"
+            },
+            "scope": 40268,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 40209,
+            "nodeType": "FunctionDefinition",
+            "src": "3345:95:61",
+            "nodes": [],
+            "body": {
+              "id": 40208,
+              "nodeType": "Block",
+              "src": "3373:67:61",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 40205,
+                        "name": "_owner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 40201,
+                        "src": "3428:6:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 40204,
+                      "name": "transferOwnership",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 49926,
+                      "src": "3410:17:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 40206,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "3410:25:61",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 40207,
+                  "nodeType": "ExpressionStatement",
+                  "src": "3410:25:61"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 40199,
+              "nodeType": "StructuredDocumentation",
+              "src": "3275:67:61",
+              "text": "@param _owner The address that will own the contract."
+            },
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 40202,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40201,
+                  "mutability": "mutable",
+                  "name": "_owner",
+                  "nameLocation": "3365:6:61",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40209,
+                  "src": "3357:14:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 40200,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3357:7:61",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3356:16:61"
+            },
+            "returnParameters": {
+              "id": 40203,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3373:0:61"
+            },
+            "scope": 40268,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "id": 40267,
+            "nodeType": "FunctionDefinition",
+            "src": "4016:469:61",
+            "nodes": [],
+            "body": {
+              "id": 40266,
+              "nodeType": "Block",
+              "src": "4134:351:61",
+              "nodes": [],
+              "statements": [
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "id": 40247,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "commonType": {
+                        "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                        "typeString": "contract IJBPriceFeed"
+                      },
+                      "id": 40234,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "baseExpression": {
+                          "baseExpression": {
+                            "id": 40223,
+                            "name": "feedFor",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 40119,
+                            "src": "4216:7:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$_$",
+                              "typeString": "mapping(uint256 => mapping(uint256 => contract IJBPriceFeed))"
+                            }
+                          },
+                          "id": 40225,
+                          "indexExpression": {
+                            "id": 40224,
+                            "name": "_currency",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 40212,
+                            "src": "4224:9:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "4216:18:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$",
+                            "typeString": "mapping(uint256 => contract IJBPriceFeed)"
+                          }
+                        },
+                        "id": 40227,
+                        "indexExpression": {
+                          "id": 40226,
+                          "name": "_base",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 40214,
+                          "src": "4235:5:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "4216:25:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                          "typeString": "contract IJBPriceFeed"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "!=",
+                      "rightExpression": {
+                        "arguments": [
+                          {
+                            "arguments": [
+                              {
+                                "hexValue": "30",
+                                "id": 40231,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "kind": "number",
+                                "lValueRequested": false,
+                                "nodeType": "Literal",
+                                "src": "4266:1:61",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_rational_0_by_1",
+                                  "typeString": "int_const 0"
+                                },
+                                "value": "0"
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_rational_0_by_1",
+                                  "typeString": "int_const 0"
+                                }
+                              ],
+                              "id": 40230,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "4258:7:61",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": {
+                                "id": 40229,
+                                "name": "address",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "4258:7:61",
+                                "typeDescriptions": {}
+                              }
+                            },
+                            "id": 40232,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "4258:10:61",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 40228,
+                          "name": "IJBPriceFeed",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 47891,
+                          "src": "4245:12:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_IJBPriceFeed_$47891_$",
+                            "typeString": "type(contract IJBPriceFeed)"
+                          }
+                        },
+                        "id": 40233,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "4245:24:61",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                          "typeString": "contract IJBPriceFeed"
+                        }
+                      },
+                      "src": "4216:53:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "||",
+                    "rightExpression": {
+                      "commonType": {
+                        "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                        "typeString": "contract IJBPriceFeed"
+                      },
+                      "id": 40246,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "baseExpression": {
+                          "baseExpression": {
+                            "id": 40235,
+                            "name": "feedFor",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 40119,
+                            "src": "4279:7:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$_$",
+                              "typeString": "mapping(uint256 => mapping(uint256 => contract IJBPriceFeed))"
+                            }
+                          },
+                          "id": 40237,
+                          "indexExpression": {
+                            "id": 40236,
+                            "name": "_base",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 40214,
+                            "src": "4287:5:61",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "4279:14:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$",
+                            "typeString": "mapping(uint256 => contract IJBPriceFeed)"
+                          }
+                        },
+                        "id": 40239,
+                        "indexExpression": {
+                          "id": 40238,
+                          "name": "_currency",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 40212,
+                          "src": "4294:9:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "4279:25:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                          "typeString": "contract IJBPriceFeed"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "!=",
+                      "rightExpression": {
+                        "arguments": [
+                          {
+                            "arguments": [
+                              {
+                                "hexValue": "30",
+                                "id": 40243,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "kind": "number",
+                                "lValueRequested": false,
+                                "nodeType": "Literal",
+                                "src": "4329:1:61",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_rational_0_by_1",
+                                  "typeString": "int_const 0"
+                                },
+                                "value": "0"
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_rational_0_by_1",
+                                  "typeString": "int_const 0"
+                                }
+                              ],
+                              "id": 40242,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "4321:7:61",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": {
+                                "id": 40241,
+                                "name": "address",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "4321:7:61",
+                                "typeDescriptions": {}
+                              }
+                            },
+                            "id": 40244,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "4321:10:61",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 40240,
+                          "name": "IJBPriceFeed",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 47891,
+                          "src": "4308:12:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_IJBPriceFeed_$47891_$",
+                            "typeString": "type(contract IJBPriceFeed)"
+                          }
+                        },
+                        "id": 40245,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "4308:24:61",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                          "typeString": "contract IJBPriceFeed"
+                        }
+                      },
+                      "src": "4279:53:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "4216:116:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 40251,
+                  "nodeType": "IfStatement",
+                  "src": "4205:168:61",
+                  "trueBody": {
+                    "errorCall": {
+                      "arguments": [],
+                      "expression": {
+                        "argumentTypes": [],
+                        "id": 40248,
+                        "name": "PRICE_FEED_ALREADY_EXISTS",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 40108,
+                        "src": "4346:25:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_error_pure$__$returns$__$",
+                          "typeString": "function () pure"
+                        }
+                      },
+                      "id": 40249,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "4346:27:61",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_tuple$__$",
+                        "typeString": "tuple()"
+                      }
+                    },
+                    "id": 40250,
+                    "nodeType": "RevertStatement",
+                    "src": "4339:34:61"
+                  }
+                },
+                {
+                  "expression": {
+                    "id": 40258,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "baseExpression": {
+                        "baseExpression": {
+                          "id": 40252,
+                          "name": "feedFor",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 40119,
+                          "src": "4403:7:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$_$",
+                            "typeString": "mapping(uint256 => mapping(uint256 => contract IJBPriceFeed))"
+                          }
+                        },
+                        "id": 40255,
+                        "indexExpression": {
+                          "id": 40253,
+                          "name": "_currency",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 40212,
+                          "src": "4411:9:61",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "4403:18:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$",
+                          "typeString": "mapping(uint256 => contract IJBPriceFeed)"
+                        }
+                      },
+                      "id": 40256,
+                      "indexExpression": {
+                        "id": 40254,
+                        "name": "_base",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 40214,
+                        "src": "4422:5:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "4403:25:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                        "typeString": "contract IJBPriceFeed"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 40257,
+                      "name": "_feed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 40217,
+                      "src": "4431:5:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                        "typeString": "contract IJBPriceFeed"
+                      }
+                    },
+                    "src": "4403:33:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                      "typeString": "contract IJBPriceFeed"
+                    }
+                  },
+                  "id": 40259,
+                  "nodeType": "ExpressionStatement",
+                  "src": "4403:33:61"
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "id": 40261,
+                        "name": "_currency",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 40212,
+                        "src": "4456:9:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "id": 40262,
+                        "name": "_base",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 40214,
+                        "src": "4467:5:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "id": 40263,
+                        "name": "_feed",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 40217,
+                        "src": "4474:5:61",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                          "typeString": "contract IJBPriceFeed"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                          "typeString": "contract IJBPriceFeed"
+                        }
+                      ],
+                      "id": 40260,
+                      "name": "AddFeed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 47903,
+                      "src": "4448:7:61",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_uint256_$_t_contract$_IJBPriceFeed_$47891_$returns$__$",
+                        "typeString": "function (uint256,uint256,contract IJBPriceFeed)"
+                      }
+                    },
+                    "id": 40264,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "4448:32:61",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 40265,
+                  "nodeType": "EmitStatement",
+                  "src": "4443:37:61"
+                }
+              ]
+            },
+            "baseFunctions": [
+              47934
+            ],
+            "documentation": {
+              "id": 40210,
+              "nodeType": "StructuredDocumentation",
+              "src": "3673:340:61",
+              "text": "@notice \nAdd a price feed for a currency in terms of the provided base currency.\n@dev\nCurrent feeds can't be modified.\n@param _currency The currency units the feed's resulting price is in terms of.\n@param _base The base currency unit being priced by the feed.\n@param _feed The price feed being added."
+            },
+            "functionSelector": "96364e6d",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "id": 40221,
+                "kind": "modifierInvocation",
+                "modifierName": {
+                  "id": 40220,
+                  "name": "onlyOwner",
+                  "nameLocations": [
+                    "4124:9:61"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 49866,
+                  "src": "4124:9:61"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "4124:9:61"
+              }
+            ],
+            "name": "addFeedFor",
+            "nameLocation": "4025:10:61",
+            "overrides": {
+              "id": 40219,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "4115:8:61"
+            },
+            "parameters": {
+              "id": 40218,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40212,
+                  "mutability": "mutable",
+                  "name": "_currency",
+                  "nameLocation": "4049:9:61",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40267,
+                  "src": "4041:17:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 40211,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4041:7:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 40214,
+                  "mutability": "mutable",
+                  "name": "_base",
+                  "nameLocation": "4072:5:61",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40267,
+                  "src": "4064:13:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 40213,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4064:7:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 40217,
+                  "mutability": "mutable",
+                  "name": "_feed",
+                  "nameLocation": "4096:5:61",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40267,
+                  "src": "4083:18:61",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                    "typeString": "contract IJBPriceFeed"
+                  },
+                  "typeName": {
+                    "id": 40216,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 40215,
+                      "name": "IJBPriceFeed",
+                      "nameLocations": [
+                        "4083:12:61"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 47891,
+                      "src": "4083:12:61"
+                    },
+                    "referencedDeclaration": 47891,
+                    "src": "4083:12:61",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IJBPriceFeed_$47891",
+                      "typeString": "contract IJBPriceFeed"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4035:70:61"
+            },
+            "returnParameters": {
+              "id": 40222,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "4134:0:61"
+            },
+            "scope": 40268,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 40103,
+              "name": "Ownable",
+              "nameLocations": [
+                "594:7:61"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 49947,
+              "src": "594:7:61"
+            },
+            "id": 40104,
+            "nodeType": "InheritanceSpecifier",
+            "src": "594:7:61"
+          },
+          {
+            "baseName": {
+              "id": 40105,
+              "name": "IJBPrices",
+              "nameLocations": [
+                "603:9:61"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 47935,
+              "src": "603:9:61"
+            },
+            "id": 40106,
+            "nodeType": "InheritanceSpecifier",
+            "src": "603:9:61"
+          }
+        ],
+        "canonicalName": "JBPrices",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 40102,
+          "nodeType": "StructuredDocumentation",
+          "src": "197:375:61",
+          "text": "@notice \nManages and normalizes price feeds.\n@dev\nAdheres to -\nIJBPrices: General interface for the methods in this contract that interact with the blockchain's state according to the protocol's rules.\n@dev\nInherits from -\nOwnable: Includes convenience functionality for checking a message sender's permissions before executing certain transactions."
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          40268,
+          47935,
+          49947,
+          55294
+        ],
+        "name": "JBPrices",
+        "nameLocation": "582:8:61",
+        "scope": 40269,
+        "usedErrors": [
+          40108,
+          40110,
+          58517
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 61
+}

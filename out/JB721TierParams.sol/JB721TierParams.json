@@ -1,0 +1,322 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "node_modules/@jbx-protocol/juice-721-delegate/contracts/structs/JB721TierParams.sol",
+    "id": 35616,
+    "exportedSymbols": {
+      "JB721TierParams": [
+        35615
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "32:1294:42",
+    "nodes": [
+      {
+        "id": 35594,
+        "nodeType": "PragmaDirective",
+        "src": "32:23:42",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 35615,
+        "nodeType": "StructDefinition",
+        "src": "1028:297:42",
+        "nodes": [],
+        "canonicalName": "JB721TierParams",
+        "members": [
+          {
+            "constant": false,
+            "id": 35596,
+            "mutability": "mutable",
+            "name": "contributionFloor",
+            "nameLocation": "1062:17:42",
+            "nodeType": "VariableDeclaration",
+            "scope": 35615,
+            "src": "1055:24:42",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint80",
+              "typeString": "uint80"
+            },
+            "typeName": {
+              "id": 35595,
+              "name": "uint80",
+              "nodeType": "ElementaryTypeName",
+              "src": "1055:6:42",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint80",
+                "typeString": "uint80"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 35598,
+            "mutability": "mutable",
+            "name": "lockedUntil",
+            "nameLocation": "1090:11:42",
+            "nodeType": "VariableDeclaration",
+            "scope": 35615,
+            "src": "1083:18:42",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint48",
+              "typeString": "uint48"
+            },
+            "typeName": {
+              "id": 35597,
+              "name": "uint48",
+              "nodeType": "ElementaryTypeName",
+              "src": "1083:6:42",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint48",
+                "typeString": "uint48"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 35600,
+            "mutability": "mutable",
+            "name": "initialQuantity",
+            "nameLocation": "1112:15:42",
+            "nodeType": "VariableDeclaration",
+            "scope": 35615,
+            "src": "1105:22:42",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint40",
+              "typeString": "uint40"
+            },
+            "typeName": {
+              "id": 35599,
+              "name": "uint40",
+              "nodeType": "ElementaryTypeName",
+              "src": "1105:6:42",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint40",
+                "typeString": "uint40"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 35602,
+            "mutability": "mutable",
+            "name": "votingUnits",
+            "nameLocation": "1138:11:42",
+            "nodeType": "VariableDeclaration",
+            "scope": 35615,
+            "src": "1131:18:42",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint16",
+              "typeString": "uint16"
+            },
+            "typeName": {
+              "id": 35601,
+              "name": "uint16",
+              "nodeType": "ElementaryTypeName",
+              "src": "1131:6:42",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint16",
+                "typeString": "uint16"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 35604,
+            "mutability": "mutable",
+            "name": "reservedRate",
+            "nameLocation": "1160:12:42",
+            "nodeType": "VariableDeclaration",
+            "scope": 35615,
+            "src": "1153:19:42",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint16",
+              "typeString": "uint16"
+            },
+            "typeName": {
+              "id": 35603,
+              "name": "uint16",
+              "nodeType": "ElementaryTypeName",
+              "src": "1153:6:42",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint16",
+                "typeString": "uint16"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 35606,
+            "mutability": "mutable",
+            "name": "reservedTokenBeneficiary",
+            "nameLocation": "1184:24:42",
+            "nodeType": "VariableDeclaration",
+            "scope": 35615,
+            "src": "1176:32:42",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 35605,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "1176:7:42",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 35608,
+            "mutability": "mutable",
+            "name": "encodedIPFSUri",
+            "nameLocation": "1220:14:42",
+            "nodeType": "VariableDeclaration",
+            "scope": 35615,
+            "src": "1212:22:42",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 35607,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "1212:7:42",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 35610,
+            "mutability": "mutable",
+            "name": "allowManualMint",
+            "nameLocation": "1243:15:42",
+            "nodeType": "VariableDeclaration",
+            "scope": 35615,
+            "src": "1238:20:42",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 35609,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "1238:4:42",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 35612,
+            "mutability": "mutable",
+            "name": "shouldUseBeneficiaryAsDefault",
+            "nameLocation": "1267:29:42",
+            "nodeType": "VariableDeclaration",
+            "scope": 35615,
+            "src": "1262:34:42",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 35611,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "1262:4:42",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 35614,
+            "mutability": "mutable",
+            "name": "transfersPausable",
+            "nameLocation": "1305:17:42",
+            "nodeType": "VariableDeclaration",
+            "scope": 35615,
+            "src": "1300:22:42",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 35613,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "1300:4:42",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "name": "JB721TierParams",
+        "nameLocation": "1035:15:42",
+        "scope": 35616,
+        "visibility": "public"
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 42
+}
