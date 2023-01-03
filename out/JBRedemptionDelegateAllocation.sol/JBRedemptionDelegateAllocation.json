@@ -1,0 +1,140 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "node_modules/@jbx-protocol/juice-contracts-v3/contracts/structs/JBRedemptionDelegateAllocation.sol",
+    "id": 49788,
+    "exportedSymbols": {
+      "IERC165": [
+        56094
+      ],
+      "IJBRedemptionDelegate": [
+        48029
+      ],
+      "JBDidRedeemData": [
+        49570
+      ],
+      "JBRedemptionDelegateAllocation": [
+        49787
+      ],
+      "JBTokenAmount": [
+        49834
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "32:297:121",
+    "nodes": [
+      {
+        "id": 49780,
+        "nodeType": "PragmaDirective",
+        "src": "32:23:121",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 49781,
+        "nodeType": "ImportDirective",
+        "src": "57:49:121",
+        "nodes": [],
+        "absolutePath": "node_modules/@jbx-protocol/juice-contracts-v3/contracts/interfaces/IJBRedemptionDelegate.sol",
+        "file": "../interfaces/IJBRedemptionDelegate.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49788,
+        "sourceUnit": 48030,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 49787,
+        "nodeType": "StructDefinition",
+        "src": "235:93:121",
+        "nodes": [],
+        "canonicalName": "JBRedemptionDelegateAllocation",
+        "members": [
+          {
+            "constant": false,
+            "id": 49784,
+            "mutability": "mutable",
+            "name": "delegate",
+            "nameLocation": "299:8:121",
+            "nodeType": "VariableDeclaration",
+            "scope": 49787,
+            "src": "277:30:121",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IJBRedemptionDelegate_$48029",
+              "typeString": "contract IJBRedemptionDelegate"
+            },
+            "typeName": {
+              "id": 49783,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 49782,
+                "name": "IJBRedemptionDelegate",
+                "nameLocations": [
+                  "277:21:121"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 48029,
+                "src": "277:21:121"
+              },
+              "referencedDeclaration": 48029,
+              "src": "277:21:121",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IJBRedemptionDelegate_$48029",
+                "typeString": "contract IJBRedemptionDelegate"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 49786,
+            "mutability": "mutable",
+            "name": "amount",
+            "nameLocation": "319:6:121",
+            "nodeType": "VariableDeclaration",
+            "scope": 49787,
+            "src": "311:14:121",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 49785,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "311:7:121",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "name": "JBRedemptionDelegateAllocation",
+        "nameLocation": "242:30:121",
+        "scope": 49788,
+        "visibility": "public"
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 121
+}

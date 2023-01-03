@@ -16,7 +16,7 @@ contract TestForkGoerli is Test {
   using JBFundingCycleMetadataResolver for JBFundingCycle;
 
   // Fork goerli - need a .env or an env var GOERLI_RPC
-  uint256 forkId = vm.createSelectFork(vm.envString('GOERLI_RPC'));
+  uint256 forkId = vm.createSelectFork(vm.envString('GOERLI'));
 
   address _caller = makeAddr('caller');
   address _beneficiary = makeAddr('beneficiary');

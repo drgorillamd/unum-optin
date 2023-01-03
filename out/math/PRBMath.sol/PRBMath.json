@@ -1,0 +1,141 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "node_modules/@paulrberg/contracts/math/PRBMath.sol",
+    "id": 58504,
+    "exportedSymbols": {
+      "PRBMath": [
+        60397
+      ],
+      "PRBMathSD59x18__AbsInputTooSmall": [
+        58528
+      ],
+      "PRBMathSD59x18__CeilOverflow": [
+        58533
+      ],
+      "PRBMathSD59x18__DivInputTooSmall": [
+        58536
+      ],
+      "PRBMathSD59x18__DivOverflow": [
+        58541
+      ],
+      "PRBMathSD59x18__Exp2InputTooBig": [
+        58551
+      ],
+      "PRBMathSD59x18__ExpInputTooBig": [
+        58546
+      ],
+      "PRBMathSD59x18__FloorUnderflow": [
+        58556
+      ],
+      "PRBMathSD59x18__FromIntOverflow": [
+        58561
+      ],
+      "PRBMathSD59x18__FromIntUnderflow": [
+        58566
+      ],
+      "PRBMathSD59x18__GmNegativeProduct": [
+        58573
+      ],
+      "PRBMathSD59x18__GmOverflow": [
+        58580
+      ],
+      "PRBMathSD59x18__LogInputTooSmall": [
+        58585
+      ],
+      "PRBMathSD59x18__MulInputTooSmall": [
+        58588
+      ],
+      "PRBMathSD59x18__MulOverflow": [
+        58593
+      ],
+      "PRBMathSD59x18__PowuOverflow": [
+        58598
+      ],
+      "PRBMathSD59x18__SqrtNegativeInput": [
+        58603
+      ],
+      "PRBMathSD59x18__SqrtOverflow": [
+        58608
+      ],
+      "PRBMathUD60x18__AddOverflow": [
+        58615
+      ],
+      "PRBMathUD60x18__CeilOverflow": [
+        58620
+      ],
+      "PRBMathUD60x18__Exp2InputTooBig": [
+        58630
+      ],
+      "PRBMathUD60x18__ExpInputTooBig": [
+        58625
+      ],
+      "PRBMathUD60x18__FromUintOverflow": [
+        58635
+      ],
+      "PRBMathUD60x18__GmOverflow": [
+        58642
+      ],
+      "PRBMathUD60x18__LogInputTooSmall": [
+        58647
+      ],
+      "PRBMathUD60x18__SqrtOverflow": [
+        58652
+      ],
+      "PRBMathUD60x18__SubUnderflow": [
+        58659
+      ],
+      "PRBMath__MulDivFixedPointOverflow": [
+        58510
+      ],
+      "PRBMath__MulDivOverflow": [
+        58517
+      ],
+      "PRBMath__MulDivSignedInputTooSmall": [
+        58520
+      ],
+      "PRBMath__MulDivSignedOverflow": [
+        58525
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "38:67:154",
+    "nodes": [
+      {
+        "id": 58502,
+        "nodeType": "PragmaDirective",
+        "src": "38:24:154",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".4"
+        ]
+      },
+      {
+        "id": 58503,
+        "nodeType": "ImportDirective",
+        "src": "64:40:154",
+        "nodes": [],
+        "absolutePath": "node_modules/prb-math/contracts/PRBMath.sol",
+        "file": "prb-math/contracts/PRBMath.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 58504,
+        "sourceUnit": 60398,
+        "symbolAliases": [],
+        "unitAlias": ""
+      }
+    ],
+    "license": "Unlicense"
+  },
+  "id": 154
+}

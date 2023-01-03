@@ -1,0 +1,102 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/draft-ERC721Votes.sol",
+    "id": 53575,
+    "exportedSymbols": {
+      "Address": [
+        53904
+      ],
+      "Checkpoints": [
+        55272
+      ],
+      "Context": [
+        55294
+      ],
+      "Counters": [
+        55368
+      ],
+      "ECDSA": [
+        55904
+      ],
+      "EIP712": [
+        56058
+      ],
+      "ERC165": [
+        56082
+      ],
+      "ERC721": [
+        53357
+      ],
+      "ERC721Votes": [
+        53544
+      ],
+      "IERC165": [
+        56094
+      ],
+      "IERC721": [
+        53473
+      ],
+      "IERC721Metadata": [
+        53571
+      ],
+      "IERC721Receiver": [
+        53491
+      ],
+      "IVotes": [
+        50025
+      ],
+      "Math": [
+        56959
+      ],
+      "SafeCast": [
+        58500
+      ],
+      "Strings": [
+        55543
+      ],
+      "Votes": [
+        50479
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "129:183:142",
+    "nodes": [
+      {
+        "id": 53573,
+        "nodeType": "PragmaDirective",
+        "src": "129:23:142",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 53574,
+        "nodeType": "ImportDirective",
+        "src": "284:27:142",
+        "nodes": [],
+        "absolutePath": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Votes.sol",
+        "file": "./ERC721Votes.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 53575,
+        "sourceUnit": 53545,
+        "symbolAliases": [],
+        "unitAlias": ""
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 142
+}
